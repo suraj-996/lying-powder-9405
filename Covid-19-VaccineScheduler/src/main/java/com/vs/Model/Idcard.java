@@ -2,7 +2,18 @@ package com.vs.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Idcard {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String name;
 	private LocalDate dob;
@@ -11,9 +22,33 @@ public class Idcard {
 	private String city;
 	private String state;
 	private String pincode;
-	
+
+	@Embedded
+	private AdharCard adharCard;
+	@Embedded
+	private PanCard panCard;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Member member;
+
 	public Idcard() {
-		
+
+	}
+
+	public Idcard(Integer id, String name, LocalDate dob, String gender, String address, String city, String state,
+			String pincode, AdharCard adharCard, PanCard panCard, Member member) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dob = dob;
+		this.gender = gender;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.pincode = pincode;
+		this.adharCard = adharCard;
+		this.panCard = panCard;
+		this.member = member;
 	}
 
 	public Integer getId() {
@@ -80,12 +115,28 @@ public class Idcard {
 		this.pincode = pincode;
 	}
 
-	@Override
-	public String toString() {
-		return "Idcard [id=" + id + ", name=" + name + ", dob=" + dob + ", gender=" + gender + ", address=" + address
-				+ ", city=" + city + ", state=" + state + ", pincode=" + pincode + "]";
+	public AdharCard getAdharCard() {
+		return adharCard;
 	}
-	
-	
-	
+
+	public void setAdharCard(AdharCard adharCard) {
+		this.adharCard = adharCard;
+	}
+
+	public PanCard getPanCard() {
+		return panCard;
+	}
+
+	public void setPanCard(PanCard panCard) {
+		this.panCard = panCard;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 }
