@@ -9,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vs.myenum.Slots;
 
 @Entity
@@ -18,14 +21,22 @@ public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long bookingid;
+	
+	
+	@NotBlank(message = "Mobile Number is Mandatory")
+	@Size(max=10,message="Moblie Number length should be 10!")
+	@Pattern(regexp = "^[6-9][0-9]{9}$",message="Mobile No is Invalid!")
 	private Long mobileno;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate dateofbooking;
 	
 	private Slots slots;
+	
 	private Boolean bookingstatus;
 
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "appointments")
-	List<VaccinationCenter> vaccinationCenters;
+	List<VaccinationCenter> vaccinationCenter;
 
 	public Appointment() {
 
@@ -39,7 +50,7 @@ public class Appointment {
 		this.dateofbooking = dateofbooking;
 		this.slots = slots;
 		this.bookingstatus = bookingstatus;
-		this.vaccinationCenters = vaccinationCenters;
+		this.vaccinationCenter = vaccinationCenters;
 	}
 
 	public long getBookingid() {
@@ -83,11 +94,11 @@ public class Appointment {
 	}
 
 	public List<VaccinationCenter> getVaccinationCenters() {
-		return vaccinationCenters;
+		return vaccinationCenter;
 	}
 
-	public void setVaccinationCenters(List<VaccinationCenter> vaccinationCenters) {
-		this.vaccinationCenters = vaccinationCenters;
+	public void setVaccinationCenters(List<VaccinationCenter> vaccinationCenter) {
+		this.vaccinationCenter = vaccinationCenter;
 	}
 
 }
