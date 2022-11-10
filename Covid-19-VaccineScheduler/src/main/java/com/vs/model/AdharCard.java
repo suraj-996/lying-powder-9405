@@ -11,6 +11,8 @@ public class AdharCard {
 	public AdharCard(Long adharNo) {
 		super();
 		this.adharNo = adharNo;
+
+
 	}
 
 	public Long getAdharNo() {
