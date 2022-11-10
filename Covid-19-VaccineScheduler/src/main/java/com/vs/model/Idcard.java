@@ -9,18 +9,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Idcard {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	private String name;
+	
+	
 	private LocalDate dob;
+	
 	private String gender;
+	
 	private String address;
+	
 	private String city;
+	
 	private String state;
+	
 	private String pincode;
 
 	@Embedded
@@ -29,6 +44,7 @@ public class Idcard {
 	@Embedded
 	private PanCard panCard;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Member member;
 
