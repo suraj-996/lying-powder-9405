@@ -14,6 +14,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class GlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> myExceptionHandler(Exception me,WebRequest re) {
+
 		MyErrorDetails err=new MyErrorDetails();
 		err.setTime(LocalDateTime.now());
 		err.setMessage(me.getMessage());
@@ -33,6 +34,7 @@ public class GlobalExceptionHandler {
 
 	}
 	
+
 	public ResponseEntity<MyErrorDetails> myIllegalArgumentExceptionHandler(IllegalArgumentException iae,WebRequest req){
 		MyErrorDetails err = new MyErrorDetails();
 		err.setTime(LocalDateTime.now());
@@ -41,6 +43,8 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
 		
 	}
+
+
 	@ExceptionHandler(VaccineException.class)
 	public ResponseEntity<MyErrorDetails> myMNVEHandler(VaccineException me,WebRequest re) {
 		MyErrorDetails err=new MyErrorDetails();
