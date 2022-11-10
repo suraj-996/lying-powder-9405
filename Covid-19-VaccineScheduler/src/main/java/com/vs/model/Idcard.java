@@ -25,6 +25,7 @@ public class Idcard {
 
 	@Embedded
 	private AdharCard adharCard;
+	
 	@Embedded
 	private PanCard panCard;
 
