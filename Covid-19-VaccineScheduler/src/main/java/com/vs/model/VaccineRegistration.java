@@ -16,19 +16,19 @@ public class VaccineRegistration {
 	private Integer registrationNo;
 	private Long mobileno;
 	private LocalDate dateofregistration;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Member member;
+
 	public VaccineRegistration() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public VaccineRegistration(long mobileno, LocalDate dateofregistration) {
 		super();
 		this.mobileno = mobileno;
 		this.dateofregistration = dateofregistration;
 	}
-
 
 	public long getMobileno() {
 		return mobileno;
@@ -46,6 +46,4 @@ public class VaccineRegistration {
 		this.dateofregistration = dateofregistration;
 	}
 
-	
-	
 }
