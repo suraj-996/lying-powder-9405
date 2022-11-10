@@ -4,20 +4,22 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 
 @Entity
 public class Member {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotNull
+	@Column(unique = true)
 	private Integer memberId;
 	private Boolean dose1status;
 	private Boolean dose2status;
