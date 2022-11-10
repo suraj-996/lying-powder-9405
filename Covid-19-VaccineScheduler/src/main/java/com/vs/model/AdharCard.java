@@ -1,6 +1,7 @@
 package com.vs.model;
 
 public class AdharCard {
+
 	private Long adharNo;
 
 	public AdharCard() {
@@ -10,14 +11,15 @@ public class AdharCard {
 	public AdharCard(Long adharNo) {
 		super();
 		this.adharNo = adharNo;
-		
+
+
 	}
 
-	public long getAdharNo() {
+	public Long getAdharNo() {
 		return adharNo;
 	}
 
-	public void setAdharNo(long adharNo) {
+	public void setAdharNo(Long adharNo) {
 		this.adharNo = adharNo;
 	}
 
