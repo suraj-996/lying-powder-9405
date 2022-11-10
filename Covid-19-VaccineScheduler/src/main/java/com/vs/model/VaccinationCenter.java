@@ -26,6 +26,24 @@ public class VaccinationCenter {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;
 
+	public List<Appointment> getAppointments() {
+		
+		return appointments;
+		
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public VaccineInventory getVaccineInventory() {
+		return vaccineInventory;
+	}
+
+	public void setVaccineInventory(VaccineInventory vaccineInventory) {
+		this.vaccineInventory = vaccineInventory;
+	}
+
 	public VaccinationCenter() {
 		// TODO Auto-generated constructor stub
 	}
@@ -68,7 +86,9 @@ public class VaccinationCenter {
 	}
 
 	public void setState(String state) {
+		
 		this.state = state;
+		
 	}
 
 	public String getPincode() {
