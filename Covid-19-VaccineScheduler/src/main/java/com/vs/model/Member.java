@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Member {
 
@@ -22,15 +24,19 @@ public class Member {
 	private LocalDate dose1date;
 	private LocalDate dose2date;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
 	private VaccineRegistration vaccineRegistration;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointment;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
 	private List<Vaccine> vaccine;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
 	private Idcard idcard;
 

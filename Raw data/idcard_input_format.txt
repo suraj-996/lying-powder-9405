@@ -4,7 +4,7 @@ Idcard data
 {
   "address": "bihar",
   "adharCard": {
-    "adharNo": 545444484,
+    "adharNo": 545444484
   },
   "city": "patna",
   "dob": "2003-11-10",

@@ -21,6 +21,7 @@ public class VaccineInventory {
 	
 	@Embedded
 	private VaccineCount vaccineCount; 
+	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<VaccinationCenter> vaccinationCenters;
 	
