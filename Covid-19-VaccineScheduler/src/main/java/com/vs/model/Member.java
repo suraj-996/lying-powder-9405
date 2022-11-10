@@ -6,30 +6,43 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.ForeignKey;
+import org.springframework.context.annotation.Primary;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Member {
-
-	@NotNull
-	@Column(unique = true)
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer memberId;
 	private Boolean dose1status;
 	private Boolean dose2status;
 	private LocalDate dose1date;
 	private LocalDate dose2date;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
 	private VaccineRegistration vaccineRegistration;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointment;
 
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
 	private List<Vaccine> vaccine;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
 	private Idcard idcard;
 
