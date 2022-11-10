@@ -8,17 +8,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Vaccine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer vaccineId;
+	
 	private String vaccineName;
 	private String description;
 
 	@Embedded
 	private VaccineCount vaccineCount;
 
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Member member;
 
