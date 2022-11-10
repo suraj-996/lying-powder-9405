@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.aspectj.weaver.patterns.ConcreteCflowPointcut.Slot;
 
 import com.vs.myenum.Slots;
 
