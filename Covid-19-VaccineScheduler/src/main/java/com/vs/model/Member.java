@@ -4,14 +4,20 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotNull;
 
-import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
+import org.hibernate.annotations.ForeignKey;
+import org.springframework.context.annotation.Primary;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Member {
@@ -24,23 +30,25 @@ public class Member {
 	private LocalDate dose1date;
 	private LocalDate dose2date;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
 	private VaccineRegistration vaccineRegistration;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointment;
 
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
 	private List<Vaccine> vaccine;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "member")
 	private Idcard idcard;
 
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public Member(Boolean dose1status, Boolean dose2status, LocalDate dose1date, LocalDate dose2date,
 			VaccineRegistration vaccineRegistration, List<Appointment> appointment, List<Vaccine> vaccine,
@@ -56,7 +64,13 @@ public class Member {
 		this.idcard = idcard;
 	}
 
+	public Integer getMemberId() {
+		return memberId;
+	}
 
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
+	}
 
 	public Boolean getDose1status() {
 		return dose1status;
@@ -122,5 +136,4 @@ public class Member {
 		this.idcard = idcard;
 	}
 
-	
 }

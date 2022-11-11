@@ -1,6 +1,7 @@
 package com.vs.model;
 
 public class PanCard {
+	
 	private String panNo;
 
 	public PanCard() {

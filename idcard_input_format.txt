@@ -1,0 +1,19 @@
+Idcard data
+
+
+{
+  "address": "bihar",
+  "adharCard": {
+    "adharNo": 545444484,
+  },
+  "city": "patna",
+  "dob": "2003-11-10",
+  "gender": "male",
+  "name": "suraj",
+  "panCard": {
+    "panNo": "juepk7214m"
+  },
+  "pincode": "800027",
+  "state": "bihar"
+}
+
