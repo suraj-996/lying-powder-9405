@@ -8,10 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class User {
+public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 
@@ -25,11 +23,11 @@ public class User {
 	@Email
 	private String email;
 	
-	public User() {
+	public Admin() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Integer userId, String name, String mobileNo, String password, String email) {
+	public Admin(Integer userId, String name, String mobileNo, String password, String email) {
 		super();
 		this.userId = userId;
 		this.name = name;
@@ -77,6 +75,4 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 }

@@ -1,16 +1,13 @@
 package com.vs.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class CurrentUserSession {
+public class CurrentAdminSession {
 	@Id
 	@Column(unique = true)
 	
@@ -19,13 +16,13 @@ public class CurrentUserSession {
 	private String uuid;
 	private LocalDateTime localDateTime;
 	
-	public CurrentUserSession() {
+	public CurrentAdminSession() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	
 
-	public CurrentUserSession(Integer userId, String uuid, LocalDateTime localDateTime) {
+	public CurrentAdminSession(Integer userId, String uuid, LocalDateTime localDateTime) {
 		super();
 		this.userId = userId;
 		this.uuid = uuid;
@@ -71,7 +68,5 @@ public class CurrentUserSession {
 		return "CurrentUserSession [userId=" + userId + ", uuid=" + uuid + ", localDateTime=" + localDateTime + "]";
 	}
 
-	
-	
 	
 }

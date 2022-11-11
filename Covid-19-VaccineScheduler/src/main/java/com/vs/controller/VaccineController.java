@@ -18,7 +18,7 @@ import com.vs.exception.VaccineException;
 import com.vs.model.Vaccine;
 import com.vs.service.VaccineService;
 
-@RestController
+//@RestController
 public class VaccineController {
 	@Autowired
 	private VaccineService vaccineService;

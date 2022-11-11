@@ -5,13 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.exception.VaccineCenterException;
 import com.vs.model.VaccinationCenter;
 import com.vs.service.VaccinationCenterService;
 
-@RestController
+//@RestController
 public class VaccinationCenterController {
 
 	
@@ -31,8 +32,8 @@ public class VaccinationCenterController {
 		return allvaclist;
 	}
 
-	
-	public VaccinationCenter getVaccineCenter(Integer centerId) throws VaccineCenterException {
+	@GetMapping("/getVaccCenter/{centerId}")
+	public VaccinationCenter getVaccineCenter(@PathVariable("centerId") Integer centerId) throws VaccineCenterException {
 		
 		 VaccinationCenter vc =vaccenser.getVaccineCenter(centerId);
 		 

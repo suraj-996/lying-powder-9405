@@ -52,37 +52,37 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
-//	@Override
-//	public Member getMemberByAadharNo(Long aadharNo) throws MemberException {
-//
-//		Member member = memberRepo.findByAdharNo(aadharNo);
-//
-//		if (member != null) {
-//
-//			return member;
-//
-//		} else {
-//
-//			throw new MemberException("Member not found with Aadhar No : " + aadharNo);
-//
-//		}
-//	}
-//
-//	@Override
-//	public Member getMemberByPanNo(String panNo) throws MemberException {
-//
-//		Member member = memberRepo.findByPanNo(panNo);
-//
-//		if (member != null) {
-//
-//			return member;
-//
-//		} else {
-//
-//			throw new MemberException("Member not found with Aadhar No : " + panNo);
-//
-//		}
-//	}
+	@Override
+	public Member getMemberByAadharNo(Long aadharNo) throws MemberException {
+
+		Member member = memberRepo.getByAdharNo(aadharNo);
+
+		if (member != null) {
+
+			return member;
+
+		} else {
+
+			throw new MemberException("Member not found with Aadhar No : " + aadharNo);
+
+		}
+	}
+
+	@Override
+	public Member getMemberByPanNo(String panNo) throws MemberException {
+
+		Member member = memberRepo.getByPanNo(panNo);
+
+		if (member != null) {
+
+			return member;
+
+		} else {
+
+			throw new MemberException("Member not found with Aadhar No : " + panNo);
+
+		}
+	}
 
 	@Override
 	public Member addMember(Member member) throws MemberException {

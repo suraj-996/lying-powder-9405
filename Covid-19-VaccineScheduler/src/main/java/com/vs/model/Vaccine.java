@@ -16,6 +16,7 @@ public class Vaccine {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private Integer vaccineId;
 	
 	private String vaccineName;

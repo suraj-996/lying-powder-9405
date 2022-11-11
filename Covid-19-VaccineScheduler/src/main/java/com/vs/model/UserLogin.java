@@ -1,14 +1,14 @@
 package com.vs.model;
 
-public class Login {
+public class UserLogin {
 	private String mobileNo;
 	private String password;
 	
-	public Login() {
+	public UserLogin() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Login(String mobileNo, String password) {
+	public UserLogin(String mobileNo, String password) {
 		super();
 		this.mobileNo = mobileNo;
 		this.password = password;

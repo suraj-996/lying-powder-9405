@@ -37,3 +37,7 @@ member
   ]
 }
 
+
+User - Appointment, Member, Vaccine, Vaccine Center,Vaccine Registration
+
+Admin - Member, accine, Vaccine Center,Vaccine Registration,Vaccine Inventory,

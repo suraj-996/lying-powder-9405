@@ -44,6 +44,7 @@ public class Idcard {
 	@Embedded
 	private PanCard panCard;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Member member;
 

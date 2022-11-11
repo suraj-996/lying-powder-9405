@@ -15,7 +15,7 @@ import com.vs.exception.IdCardException;
 import com.vs.model.Idcard;
 import com.vs.service.IdCardService;
 
-@RestController
+//@RestController
 public class IdCardController {
 	@Autowired
 	private IdCardService idCardService;

@@ -18,6 +18,7 @@ public class VaccineInventory {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private Integer inventoryId;
 	private LocalDate date;
 	private String location;

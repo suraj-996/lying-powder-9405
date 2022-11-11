@@ -19,7 +19,7 @@ import com.vs.model.Vaccine;
 import com.vs.model.VaccineInventory;
 import com.vs.service.VaccineInventoryService;
 
-@RestController
+//@RestController
 public class VaccineInventoryController {
 
 	@Autowired
@@ -98,10 +98,6 @@ public class VaccineInventoryController {
 //		
 //		
 //	}
-
-
-
-	
 
 
 	

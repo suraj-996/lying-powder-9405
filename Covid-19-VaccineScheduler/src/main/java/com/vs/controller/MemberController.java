@@ -18,8 +18,8 @@ import com.vs.exception.MemberException;
 import com.vs.model.Member;
 import com.vs.service.MemberService;
 
-@RestController
-@RequestMapping(value = "/member")
+//@RestController
+//@RequestMapping(value = "/member")
 public class MemberController {
 
 	@Autowired

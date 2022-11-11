@@ -11,9 +11,9 @@ public interface MemberService {
 
 	public Member getMemberById(Integer memberId) throws MemberException;
 
-//	public Member getMemberByAadharNo(Long aadharNo) throws MemberException;
-//
-//	public Member getMemberByPanNo(String panNo) throws MemberException;
+	public Member getMemberByAadharNo(Long aadharNo) throws MemberException;
+
+	public Member getMemberByPanNo(String panNo) throws MemberException;
 
 	public Member addMember(Member member) throws MemberException;
 
