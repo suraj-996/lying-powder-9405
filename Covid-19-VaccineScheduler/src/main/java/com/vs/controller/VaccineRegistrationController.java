@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.exception.VaccineRegistrationException;
+import com.vs.model.Member;
 import com.vs.model.VaccineRegistration;
 import com.vs.service.VaccineRegistrationService;
 
@@ -28,6 +29,18 @@ public class VaccineRegistrationController {
 		List<VaccineRegistration> vaccineRegistration = vrService.getVaccineRegistration(mobileno);
 		return new ResponseEntity<List<VaccineRegistration>>(vaccineRegistration, HttpStatus.OK);
 		
+	}
+	
+	@GetMapping("/getMembers/{mobileno}")
+	public ResponseEntity<List<Member>> getAllMemberHandler(@PathVariable("mobileno") Long mobileno) throws VaccineRegistrationException{
+		List<Member> members = vrService.getAllMember(mobileno);
+		return new ResponseEntity<List<Member>>(members, HttpStatus.OK);
+	}
+	
+	@PutMapping("/addvaccineRegistration")
+	public ResponseEntity<VaccineRegistration> addVaccineRegistrationHandler(@RequestBody VaccineRegistration regs) throws VaccineRegistrationException{
+		VaccineRegistration addVaccineRegistration= vrService.addVaccineRegistration(regs);
+		return new ResponseEntity<VaccineRegistration>(addVaccineRegistration, HttpStatus.OK);
 	}
 	
 	@PutMapping("/vaccineRegisrations")
