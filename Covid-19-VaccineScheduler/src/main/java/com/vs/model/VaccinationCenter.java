@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class VaccinationCenter {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer code;
