@@ -29,12 +29,19 @@ public class VaccineRegistration {
 		this.dateofregistration = dateofregistration;
 	}
 
+	public Integer getRegistrationNo() {
+		return registrationNo;
+	}
 
-	public long getMobileno() {
+	public void setRegistrationNo(Integer registrationNo) {
+		this.registrationNo = registrationNo;
+	}
+
+	public Long getMobileno() {
 		return mobileno;
 	}
 
-	public void setMobileno(long mobileno) {
+	public void setMobileno(Long mobileno) {
 		this.mobileno = mobileno;
 	}
 
@@ -45,6 +52,17 @@ public class VaccineRegistration {
 	public void setDateofregistration(LocalDate dateofregistration) {
 		this.dateofregistration = dateofregistration;
 	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	
+	
 
 	
 	
