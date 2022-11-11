@@ -1,4 +1,4 @@
-package com.vs.service;
+package com.vs.implementation;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.vs.exception.MemberException;
 import com.vs.model.Member;
 import com.vs.repo.MemberRepo;
+import com.vs.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService {
