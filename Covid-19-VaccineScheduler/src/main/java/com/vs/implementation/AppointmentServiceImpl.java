@@ -18,7 +18,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public AppointmentRepo appointmentRepo;
 	
 	@Override
-	public List<Appointment> getAllAppoinments() throws AppointmentException {
+	public List<Appointment> getAllAppointments() throws AppointmentException {
 		
         List<Appointment> appointments = appointmentRepo.findAll();
 		
@@ -34,7 +34,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	
 
 	@Override
-	public Appointment getAppoinment(Long bookingId) throws AppointmentException {
+	public Appointment getAppointment(Long bookingId) throws AppointmentException {
 		
 		return appointmentRepo.findById(bookingId)
 				.orElseThrow(() -> new AppointmentException("Appointment not found by booking id :"+bookingId));
@@ -46,7 +46,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	
 
 	@Override
-	public Appointment addAppoinment(Appointment app) throws AppointmentException {
+	public Appointment addAppointment(Appointment app) throws AppointmentException {
 		Appointment appointment = appointmentRepo.save(app);
 		if(appointment!=null) {
 			return appointment;
@@ -56,7 +56,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Appointment updateAppoinment(Appointment app) throws AppointmentException {
+	public Appointment updateAppointment(Appointment app) throws AppointmentException {
         Optional<Appointment> appointment = appointmentRepo.findById(app.getBookingid());
 		
 		if(appointment.isPresent()) {
@@ -73,9 +73,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 	
 
 	@Override
-	public boolean deleteAppoinment(Appointment app) throws AppointmentException {
+	public boolean deleteAppointment(Long bookingId) throws AppointmentException {
 		
-		Appointment appointment = appointmentRepo.findById(app.getBookingid())
+		Appointment appointment = appointmentRepo.findById(bookingId)
 				.orElseThrow(() -> new AppointmentException("Appointment not found!"));
 		
 		appointmentRepo.delete(appointment);
