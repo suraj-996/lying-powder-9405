@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class VaccineRegistration {
 	@Id
@@ -17,6 +19,7 @@ public class VaccineRegistration {
 	private Long mobileno;
 	private LocalDate dateofregistration;
 	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Member member;
 	public VaccineRegistration() {

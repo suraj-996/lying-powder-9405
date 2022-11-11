@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.vs.exception.VaccineRegistrationException;
 import com.vs.model.Member;
@@ -11,6 +12,7 @@ import com.vs.model.VaccineRegistration;
 import com.vs.repo.VaccineRegistrationRepo;
 import com.vs.service.VaccineRegistrationService;
 
+@Service
 public class VaccineRegistrationServiceImpl implements VaccineRegistrationService{
 	
 	@Autowired

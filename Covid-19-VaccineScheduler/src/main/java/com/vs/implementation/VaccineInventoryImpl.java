@@ -15,6 +15,7 @@ import com.vs.model.Vaccine;
 import com.vs.model.VaccineCount;
 import com.vs.model.VaccineInventory;
 import com.vs.repo.VaccineInventoryRepo;
+import com.vs.repo.VaccineRepo;
 import com.vs.service.VaccineInventoryService;
 
 @Service
@@ -22,11 +23,15 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 
 	@Autowired
 	private VaccineInventoryRepo viRepo;
+	
+	@Autowired
+	private VaccineRepo vRepo;
+	
 
    //   private VaccinationCentreRepo vcRepo;
 
-	@Override
-	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid) throws VaccineException {
+//	@Override
+//	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid) throws VaccineException {
 
 //		Optional<VaccinationCenter> opt = vcRepo.findById(Centerid);
 //
@@ -39,9 +44,9 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 //
 //		throw new VaccineException("Enter valid center id");
 		
-		return null;
+//		return null;
 
-	}
+//	}
 
 	@Override
 	public VaccineInventory addVaccineCount(VaccineInventory vinv, Integer count) throws VaccineException {
@@ -133,33 +138,36 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 		throw new VaccineException("Vaccine inventory not found");
 	}
 
-	@Override
-	public List<VaccineInventory> getVaccineInventoryByVaccine(Vaccine vc) throws VaccineException {
-		// TODO Auto-generated method stub
-		
-		List<VaccineInventory> inventorylist =viRepo.findAll();
-		
-		if(inventorylist.size()==0) {
-			throw new VaccineException("inventoryList is empty");
-		}
-		
-		List<VaccineInventory> inventorylistbyvaccinename = new ArrayList<>();
-		
-		for(VaccineInventory vaccineinventory: inventorylist) {
-			
-			if(vaccineinventory.getVaccine().getVaccineName().equalsIgnoreCase(vc.getVaccineName())) {
-				inventorylistbyvaccinename.add(vaccineinventory);
-			}
-			
-		}
-		
-		if(inventorylistbyvaccinename.size()==0) {
-			throw new VaccineException("no such Vaccineinventory exist with vaccine name:"+vc.getVaccineName());
-		}
-		
-
-		return inventorylistbyvaccinename;
-	}
+//	@Override
+//	public List<VaccineInventory> getVaccineInventoryByVaccine(Vaccine vc) throws VaccineException {
+//		// TODO Auto-generated method stub
+//		
+//		List<VaccineInventory> inventorylist =viRepo.findAll();
+//		
+//		if(inventorylist.size()==0) {
+//			throw new VaccineException("inventoryList is empty");
+//		}
+//		
+//		List<VaccineInventory> inventorylistbyvaccinename = new ArrayList<>();
+//		
+//		for(VaccineInventory vaccineinventory: inventorylist) {
+//			
+//			if(vaccineinventory.get.getVaccineName().equalsIgnoreCase(vc.getVaccineName())) {
+//				inventorylistbyvaccinename.add(vaccineinventory);
+//			}
+//			
+//			Vaccine v=vRepo.findVaccineByName(vc.getVaccineName());
+//			
+//			
+//		}
+//		
+//		if(inventorylistbyvaccinename.size()==0) {
+//			throw new VaccineException("no such Vaccineinventory exist with vaccine name:"+vc.getVaccineName());
+//		}
+//		
+//
+//		return inventorylistbyvaccinename;
+//	}
 
 	
 }

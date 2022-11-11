@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.exception.VaccineException;
@@ -22,19 +24,19 @@ public class VaccineInventoryController {
 
 	@Autowired
 	private VaccineInventoryService vaccInvSer;
+//	
+//	@GetMapping("/getInvByCenter/{centerid}")
+//	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer Centerid)throws VaccineException{
+//		
+//		
+//		VaccineInventory vaccineinventory =vaccInvSer.getVaccineInventoryByCenter(Centerid);
+//		
+//		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
+//	}
+//	
 	
-	@GetMapping("/getInvByCenter/{centerid}")
-	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer Centerid)throws VaccineException{
-		
-		
-		VaccineInventory vaccineinventory =vaccInvSer.getVaccineInventoryByCenter(Centerid);
-		
-		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
-	}
-	
-	
-	@PutMapping("/addVaccCount/vinv/{count}")
-	public ResponseEntity<VaccineInventory> addVaccineCount(@PathVariable("vinv") VaccineInventory vinv,@PathVariable("count") Integer count)throws VaccineException{
+	@PutMapping("/addVaccCount/{count}")
+	public ResponseEntity<VaccineInventory> addVaccineCount(@RequestBody VaccineInventory vinv ,@PathVariable("count") Integer count)throws VaccineException{
 		
 		VaccineInventory vaccineinventory =vaccInvSer.addVaccineCount(vinv, count);
 		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
@@ -43,15 +45,15 @@ public class VaccineInventoryController {
 	
 	
 	@PutMapping("/updateVaccinv/vinv")
-	public ResponseEntity<VaccineInventory> updateVaccineInventory(VaccineInventory vinv)throws VaccineException{
+	public ResponseEntity<VaccineInventory> updateVaccineInventory(@RequestBody VaccineInventory vinv)throws VaccineException{
 		
 		VaccineInventory vaccineinventory  =vaccInvSer.updateVaccineInventory(vinv);
 		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
 
 	}
 	
-	@DeleteMapping("/deleteinv/vinv")
-	public boolean deleteVaccineInventory( @PathVariable("vinv") VaccineInventory vinv)throws VaccineException{
+	@DeleteMapping("/deleteinv")
+	public boolean deleteVaccineInventory(@RequestBody VaccineInventory vinv)throws VaccineException{
 		
 		boolean flag  =vaccInvSer.deleteVaccineInventory(vinv);
 		
@@ -80,22 +82,22 @@ public class VaccineInventoryController {
 	}
 	
 	
-	@GetMapping("/getinvByVaccname/{vaccine}")
-	public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByVaccine(@PathVariable("vaccine") Vaccine vc)throws VaccineException{
-		
-		
-		List<VaccineInventory> invList =vaccInvSer.getVaccineInventoryByVaccine(vc);
-		
-		if(invList.size()==0) {
-			
-			throw new VaccineException("inventory List is empty");
-		}
-		
-		return new ResponseEntity<List<VaccineInventory>>(invList,HttpStatus.OK);
-			
-		
-		
-	}
+//	@GetMapping("/getinvByVaccname/{vaccine}")
+//	public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByVaccine(@PathVariable("vaccine") Vaccine vc)throws VaccineException{
+//		
+//		
+//		List<VaccineInventory> invList =vaccInvSer.getVaccineInventoryByVaccine(vc);
+//		
+//		if(invList.size()==0) {
+//			
+//			throw new VaccineException("inventory List is empty");
+//		}
+//		
+//		return new ResponseEntity<List<VaccineInventory>>(invList,HttpStatus.OK);
+//			
+//		
+//		
+//	}
 
 
 

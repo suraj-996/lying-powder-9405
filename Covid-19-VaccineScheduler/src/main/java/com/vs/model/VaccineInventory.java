@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class VaccineInventory {
 	
@@ -23,8 +25,8 @@ public class VaccineInventory {
 	@Embedded
 	private VaccineCount vaccineCount; 
 	
-	
-	
+
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<VaccinationCenter> vaccinationCenters;
 	

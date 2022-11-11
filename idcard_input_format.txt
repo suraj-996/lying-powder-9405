@@ -17,3 +17,23 @@ Idcard data
   "state": "bihar"
 }
 
+member
+
+
+{
+  "dose1date": "2020-10-11",
+  "dose1status": true,
+  "dose2date": "2020-12-11",
+  "dose2status": false,
+  "vaccine": [
+    {
+      "description": "vaccine-desc",
+      "vaccineCount": {
+        "price": 1000,
+        "quantity": 100
+      },
+      "vaccineName": "cowaxin"
+    }
+  ]
+}
+

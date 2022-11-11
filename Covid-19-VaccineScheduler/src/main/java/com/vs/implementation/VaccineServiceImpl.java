@@ -26,10 +26,10 @@ public class VaccineServiceImpl implements VaccineService {
 	}
 
 	@Override
-	public Vaccine getVaccineByName(String vaccineName) throws VaccineException{
-		Vaccine vaccine=vaccineRepo.findVaccineByName(vaccineName);
-		if(vaccine!=null) {
-			return vaccine;
+	public List<Vaccine> getVaccineByName(String vaccineName) throws VaccineException{
+		List<Vaccine> vaccines=vaccineRepo.findVaccineByName(vaccineName);
+		if(vaccines.size()!=0) {
+			return vaccines;
 		}else {
 			throw new VaccineException("Vaccine not found with vaccine name - "+vaccineName);
 		}
@@ -69,12 +69,17 @@ public class VaccineServiceImpl implements VaccineService {
 	}
 
 	@Override
-	public Boolean deleteVaccine(Vaccine vaccine) throws VaccineException{
+	public Boolean deleteVaccine(Integer vaccineId) throws VaccineException{
 		boolean ans=false;
-		Optional<Vaccine> opt=vaccineRepo.findById(vaccine.getVaccineId());
+		Optional<Vaccine> opt=vaccineRepo.findById(vaccineId);
 		if(opt.isPresent()) {
-			vaccineRepo.delete(vaccine);
-			ans=true;
+			Vaccine v=opt.get();
+			if(v.getVaccineCount().getQuantity()==0) {
+				vaccineRepo.delete(v);
+				ans=true;
+				
+			}
+			
 		}else {
 			throw new VaccineException("Vaccine not found ");
 		}

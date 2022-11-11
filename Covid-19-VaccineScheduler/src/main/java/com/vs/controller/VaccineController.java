@@ -30,9 +30,9 @@ public class VaccineController {
 	}
 	
 	@GetMapping("/vaccine")
-	public ResponseEntity<Vaccine> getVaccineByNameController(@RequestParam("vaccineName") String vaccineName) throws VaccineException{
-		Vaccine vaccine=vaccineService.getVaccineByName(vaccineName);
-		return new ResponseEntity<Vaccine>(vaccine,HttpStatus.OK);
+	public ResponseEntity<List<Vaccine>> getVaccineByNameController(@RequestParam("vaccineName") String vaccineName) throws VaccineException{
+		List<Vaccine> vaccines=vaccineService.getVaccineByName(vaccineName);
+		return new ResponseEntity<List<Vaccine>>(vaccines,HttpStatus.OK);
 	}
 	
 	@GetMapping("/vaccine/{vaccineId}")
@@ -53,9 +53,9 @@ public class VaccineController {
 		return new ResponseEntity<Vaccine>(vacc,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/vaccines")
-	public ResponseEntity<Boolean> deleteVaccineController(@RequestBody Vaccine vaccine) throws VaccineException{
-		Boolean ans=vaccineService.deleteVaccine(vaccine);
+	@DeleteMapping("/vaccines/{vaccineId}")
+	public ResponseEntity<Boolean> deleteVaccineController(@PathVariable("vaccineId") Integer vaccineId) throws VaccineException{
+		Boolean ans=vaccineService.deleteVaccine(vaccineId);
 		return new ResponseEntity<Boolean>(ans,HttpStatus.OK);
 	}
 	

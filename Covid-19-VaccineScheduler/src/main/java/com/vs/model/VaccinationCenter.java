@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class VaccinationCenter {
 	@Id
@@ -20,9 +22,11 @@ public class VaccinationCenter {
 	private String state;
 	private String pincode;
 
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
 
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;
 

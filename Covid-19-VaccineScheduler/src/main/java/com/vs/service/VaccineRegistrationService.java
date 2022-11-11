@@ -8,7 +8,7 @@ import com.vs.exception.VaccineRegistrationException;
 import com.vs.model.Member;
 import com.vs.model.VaccineRegistration;
 
-@RestController
+
 public interface VaccineRegistrationService {
 	
 	public List<VaccineRegistration> getVaccineRegistration(Long moblieno) throws VaccineRegistrationException;
