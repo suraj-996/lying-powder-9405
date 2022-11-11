@@ -7,15 +7,15 @@ import com.vs.model.VaccinationCenter;
 
 public interface VaccinationCenterService {
 	
-	public List<VaccinationCenter> getAllCenters() throws VaccineCenterException;;
+	public List<VaccinationCenter> getAllVaccineCenters() throws VaccineCenterException;
 	
-	public VaccinationCenter getVaccineCenter(Integer centerId) throws VaccineCenterException;;
+	public VaccinationCenter getVaccineCenter(Integer centerId) throws VaccineCenterException;
 	
-	public VaccinationCenter addVaccinationCenter(VaccinationCenter center);
+	public VaccinationCenter addVaccinationCenter(VaccinationCenter center)throws VaccineCenterException;
 
-	public VaccinationCenter updateVaccinationCenter(VaccinationCenter center) throws VaccineCenterException;;
+	public VaccinationCenter updateVaccinationCenter(VaccinationCenter center) throws VaccineCenterException;
 	
-	public boolean deleteVaccinationCenter(VaccinationCenter center) throws VaccineCenterException;;
+	public boolean deleteVaccinationCenter(VaccinationCenter center) throws VaccineCenterException;
 	
 	
 }
