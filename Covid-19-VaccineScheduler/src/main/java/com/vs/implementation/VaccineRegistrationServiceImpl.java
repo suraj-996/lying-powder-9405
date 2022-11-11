@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.vs.exception.VaccineRegistrationException;
 import com.vs.model.Member;
 import com.vs.model.VaccineRegistration;
+import com.vs.repo.MemberRepo;
 import com.vs.repo.VaccineRegistrationRepo;
 import com.vs.service.VaccineRegistrationService;
 
@@ -17,6 +18,9 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	
 	@Autowired
 	private VaccineRegistrationRepo vaccineRegistrationRepo;
+	
+	@Autowired
+	private MemberRepo memberRepo;
 
 	@Override
 	public List<VaccineRegistration> getVaccineRegistration(Long moblieno) throws VaccineRegistrationException {
@@ -33,14 +37,31 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	@Override
 	public List<Member> getAllMember(Long mobileno) throws VaccineRegistrationException {
 		
+		List<Member> member = memberRepo.findAll();
 		
-		return null;
+		if(member.size()==0) {
+			throw new VaccineRegistrationException("No memeber Found");
+		}else {
+			return member;
+		}
+		
+		
 	}
 
 	@Override
 	public VaccineRegistration addVaccineRegistration(VaccineRegistration regs) throws VaccineRegistrationException {
+//		Optional<VaccineRegistration> opt = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
+//		if(opt.isPresent()) {
+//			throw new VaccineRegistrationException("VaccineRegistration present already");
+//		}
+//		return opt.
 		
-		return null;
+//		Optional<VaccineRegistration> vaccineRegestration = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
+		
+		VaccineRegistration addVaccineRegistration = vaccineRegistrationRepo.save(regs);
+		
+		return addVaccineRegistration;
+		
 	}
 
 	@Override
@@ -59,7 +80,7 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	@Override
 	public boolean deleteVaccineRegistration(VaccineRegistration regs) throws VaccineRegistrationException {
 		Optional<VaccineRegistration> opt = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
-		if(opt.isPresent()) {
+		if(!opt.isPresent()) {
 			throw new RuntimeException("not able to access");
 		}
 		
