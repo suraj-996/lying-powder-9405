@@ -93,23 +93,23 @@ public class AdminController {
 
 	}
 
-//	@GetMapping(value = "/membersbyaadhar/{aadhar}")
-//	public ResponseEntity<Member> getMemberByAadharNo(@PathVariable("aadhar") Long aadharNo) throws MemberException {
-//
-//		Member member = memberService.getMemberByAadharNo(aadharNo);
-//
-//		return new ResponseEntity<Member>(member, HttpStatus.OK);
-//
-//	}
-//
-//	@GetMapping(value = "/membersbypan/{pan}")
-//	public ResponseEntity<Member> getMemberByPanNo(@PathVariable("pan") String panNo) throws MemberException {
-//
-//		Member member = memberService.getMemberByPanNo(panNo);
-//
-//		return new ResponseEntity<Member>(member, HttpStatus.OK);
-//
-//	}
+	@GetMapping(value = "/membersbyaadhar/{aadhar}")
+	public ResponseEntity<Member> getMemberByAadharNo(@PathVariable("aadhar") Long aadharNo) throws MemberException {
+
+		Member member = memberService.getMemberByAadharNo(aadharNo);
+
+		return new ResponseEntity<Member>(member, HttpStatus.OK);
+
+	}
+
+	@GetMapping(value = "/membersbypan/{pan}")
+	public ResponseEntity<Member> getMemberByPanNo(@PathVariable("pan") String panNo) throws MemberException {
+
+		Member member = memberService.getMemberByPanNo(panNo);
+
+		return new ResponseEntity<Member>(member, HttpStatus.OK);
+
+	}
 
 	@PostMapping(value = "/members")
 	public ResponseEntity<Member> addMember(@RequestBody Member member) throws MemberException {
