@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class VaccineInventory {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer inventoryId;
@@ -21,6 +22,9 @@ public class VaccineInventory {
 	
 	@Embedded
 	private VaccineCount vaccineCount; 
+	
+	
+	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<VaccinationCenter> vaccinationCenters;
 	
@@ -35,6 +39,18 @@ public class VaccineInventory {
 		this.location = location;
 		this.vaccineCount = vaccineCount;
 		this.vaccinationCenters = vaccinationCenters;
+	}
+
+	
+	
+	
+
+	public Integer getInventoryId() {
+		return inventoryId;
+	}
+
+	public void setInventoryId(Integer inventoryId) {
+		this.inventoryId = inventoryId;
 	}
 
 	public LocalDate getDate() {
