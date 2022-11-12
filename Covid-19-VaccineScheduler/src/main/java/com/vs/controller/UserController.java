@@ -179,8 +179,8 @@ public class UserController {
 	}
 
 	@DeleteMapping("/vaccineRegistration/{registrationNo}")
-	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo) throws VaccineRegistrationException{
-		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo);
+	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo,@RequestParam(value = "key", required = false) String key) throws VaccineRegistrationException, LoginException{
+		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo,key);
 		
 		return new ResponseEntity<Boolean>(deleteVR,HttpStatus.OK);
 	}

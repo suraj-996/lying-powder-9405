@@ -44,7 +44,7 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 
 		if (currentSessionAdmin != null || currentSessionUser != null) {
 
-			VaccineRegistration vaccineRegistration = vaccineRegistrationRepo.findByMobileno(moblieno, key);
+			VaccineRegistration vaccineRegistration = vaccineRegistrationRepo.findByMobileno(moblieno);
 			if (vaccineRegistration != null) {
 				return vaccineRegistration;
 			} else {
@@ -52,13 +52,11 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 			}
 		} else
 			throw new LoginException("Oops...! Login as a user/Admin first.");
-
-	
+	}
 
 	@Override
 
 	public List<Member> getAllMember(Long mobileno, String key) throws VaccineRegistrationException, LoginException {
-	 {
 
 		List<Member> member = memberRepo.findAll();
 
@@ -74,13 +72,6 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 
 	public VaccineRegistration addVaccineRegistration(VaccineRegistration regs, String key)
 			throws VaccineRegistrationException, LoginException {
-//		Optional<VaccineRegistration> opt = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
-//		if(opt.isPresent()) {
-//			throw new VaccineRegistrationException("VaccineRegistration present already");
-//		}
-//		return opt.
-
-//		Optional<VaccineRegistration> vaccineRegestration = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
 
 		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
@@ -94,18 +85,6 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 
 		} else
 			throw new LoginException("Oops...! Login as a user/Admin first.");
-
-	public VaccineRegistration addVaccineRegistration(VaccineRegistration regs) throws VaccineRegistrationException {
-		Optional<VaccineRegistration> opt = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
-		if (opt.isPresent()) {
-			throw new VaccineRegistrationException("VaccineRegistration present already");
-		} else {
-			VaccineRegistration addVaccineRegistration = vaccineRegistrationRepo.save(regs);
-
-			return addVaccineRegistration;
-		}
-
-
 	}
 
 	@Override
@@ -128,23 +107,11 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 			}
 		} else
 			throw new LoginException("Oops...! Login as a user/Admin first.");
-
-	public VaccineRegistration updateVaccineRegistration(VaccineRegistration regs) throws VaccineRegistrationException {
-
-		Optional<VaccineRegistration> opt = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
-		if (opt.isPresent()) {
-			VaccineRegistration updatedVaccineRegs = vaccineRegistrationRepo.save(regs);
-			return updatedVaccineRegs;
-		} else {
-			throw new VaccineRegistrationException("Invalid VaccineRegistration");
-		}
-
-
 	}
 
 	@Override
 
-	public boolean deleteVaccineRegistration(VaccineRegistration regs, String key)
+	public boolean deleteVaccineRegistration(Integer regs, String key)
 			throws VaccineRegistrationException, LoginException {
 
 		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
@@ -153,31 +120,17 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 
 		if (currentSessionAdmin != null || currentSessionUser != null) {
 
-			Optional<VaccineRegistration> opt = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
+			Optional<VaccineRegistration> opt = vaccineRegistrationRepo.findById(regs);
 			if (!opt.isPresent()) {
 				throw new RuntimeException("not able to access");
 			} else {
-				VaccineRegistration vaccineRegestration = vaccineRegistrationRepo.findById(regs.getRegistrationNo())
+				VaccineRegistration vaccineRegestration = vaccineRegistrationRepo.findById(regs)
 						.orElseThrow(() -> new VaccineRegistrationException("Vaccine Registration not Found"));
 				vaccineRegistrationRepo.delete(vaccineRegestration);
 				return true;
 			}
 		} else
 			throw new LoginException("Oops...! Login as a user/Admin first.");
-
-	public boolean deleteVaccineRegistration(Integer regnum) throws VaccineRegistrationException {
-//		Optional<VaccineRegistration> opt = vaccineRegistrationRepo.findById(regs.getRegistrationNo());
-//		if (!opt.isPresent()) {
-//			throw new RuntimeException("not able to access");
-//		}else {
-//			
-//		}
-
-		VaccineRegistration vaccineRegestration = vaccineRegistrationRepo.findById(regnum)
-				.orElseThrow(() -> new VaccineRegistrationException("Vaccine Registration not Found"));
-		vaccineRegistrationRepo.delete(vaccineRegestration);
-		return true;
-
 	}
 
 }

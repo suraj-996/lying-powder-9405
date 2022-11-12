@@ -57,7 +57,7 @@ public class AdminController {
 	private VaccineInventoryService vaccInvSer;
 
 	@PostMapping("/admin")
-	public ResponseEntity<Admin> saveUser(@RequestBody Admin admin) throws AdminException {
+	public ResponseEntity<Admin> saveAdmin(@RequestBody Admin admin) throws AdminException {
 
 		Admin savedCustomer = adminService.createCustomer(admin);
 
@@ -65,7 +65,7 @@ public class AdminController {
 	}
 
 	@PutMapping("/admin")
-	public ResponseEntity<Admin> updateUser(@RequestBody Admin admin, @RequestParam(required = false) String key)
+	public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin, @RequestParam(required = false) String key)
 			throws AdminException {
 
 		Admin updatedCustomer = adminService.updateCustomer(admin, key);
@@ -229,7 +229,8 @@ public class AdminController {
 		return vc;
 	}
 
-	public VaccinationCenter addVaccinationCenter(VaccinationCenter center,
+	@PostMapping("/addVaccCenter")
+	public VaccinationCenter addVaccinationCenter(@RequestBody VaccinationCenter center,
 			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
 
 		VaccinationCenter vc = vaccenser.addVaccinationCenter(center, key);
@@ -242,7 +243,8 @@ public class AdminController {
 
 	}
 
-	public VaccinationCenter updateVaccinationCenter(VaccinationCenter center,
+	@PutMapping("/updateVaccCenter")
+	public VaccinationCenter updateVaccinationCenter(@RequestBody VaccinationCenter center,
 			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
 
 		VaccinationCenter vc = vaccenser.updateVaccinationCenter(center, key);
@@ -254,7 +256,8 @@ public class AdminController {
 
 	}
 
-	public boolean deleteVaccinationCenter(VaccinationCenter center,
+	@DeleteMapping("/deleteVaccCenter")
+	public boolean deleteVaccinationCenter(@RequestBody VaccinationCenter center,
 			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
 
 		boolean flag = vaccenser.deleteVaccinationCenter(center, key);
@@ -290,30 +293,26 @@ public class AdminController {
 		return new ResponseEntity<VaccineRegistration>(updateVR, HttpStatus.ACCEPTED);
 	}
 
-
-
-	
 	@DeleteMapping("/vaccineRegistration/{registrationNo}")
-	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo) throws VaccineRegistrationException{
-		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo);
-		
-		return new ResponseEntity<Boolean>(deleteVR,HttpStatus.OK);
+	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(
+			@PathVariable("registrationNo") Integer registrationNo,
+			@RequestParam(value = "key", required = false) String key)
+			throws VaccineRegistrationException, LoginException {
+		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo, key);
+
+		return new ResponseEntity<Boolean>(deleteVR, HttpStatus.OK);
 	}
-	
-	//vaccine inventory
-	
-	
-	
+
+	// vaccine inventory
+
 	@GetMapping("/getInvByCenter/{centerid}")
-	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer centerid)throws VaccineException{
-		
-		
-		VaccineInventory vaccineinventory =vaccInvSer.getVaccineInventoryByCenter(centerid);
-		
-		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
+	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer centerid,
+			@RequestParam(value = "key", required = false) String key) throws VaccineException, LoginException {
+
+		VaccineInventory vaccineinventory = vaccInvSer.getVaccineInventoryByCenter(centerid, key);
+
+		return new ResponseEntity<VaccineInventory>(vaccineinventory, HttpStatus.OK);
 	}
-	
-	
 
 	@PutMapping("/addVaccCount/{count}")
 	public ResponseEntity<VaccineInventory> addVaccineCount(@RequestBody VaccineInventory vinv,
@@ -364,23 +363,19 @@ public class AdminController {
 
 	}
 
-	
-	
 	@GetMapping("/getinvByVaccname")
-	public ResponseEntity<VaccineInventory> getVaccineInventoryByVaccine(@RequestBody Vaccine vc)throws VaccineException{
-		
-		
-		VaccineInventory invList =vaccInvSer.getVaccineInventoryByVaccine(vc);
-		
-		if(invList==null) {
-			
+	public ResponseEntity<VaccineInventory> getVaccineInventoryByVaccine(@RequestBody Vaccine vc,
+			@RequestParam(value = "key", required = false) String key) throws VaccineException, LoginException {
+
+		VaccineInventory invList = vaccInvSer.getVaccineInventoryByVaccine(vc, key);
+
+		if (invList == null) {
+
 			throw new VaccineException("inventory List is empty");
 		}
-		
-		return new ResponseEntity<VaccineInventory>(invList,HttpStatus.OK);
-			
-		
-		
+
+		return new ResponseEntity<VaccineInventory>(invList, HttpStatus.OK);
+
 	}
 
 }

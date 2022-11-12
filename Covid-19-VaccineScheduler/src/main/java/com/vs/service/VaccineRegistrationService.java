@@ -22,19 +22,11 @@ public interface VaccineRegistrationService {
 	public VaccineRegistration updateVaccineRegistration(VaccineRegistration reg, String key)
 			throws VaccineRegistrationException, LoginException;
 
-	public boolean deleteVaccineRegistration(VaccineRegistration reg, String key)
+	public boolean deleteVaccineRegistration(Integer reg, String key)
 			throws VaccineRegistrationException, LoginException;
 
 	
-	public List<VaccineRegistration> getVaccineRegistration(Long moblieno) throws VaccineRegistrationException;
 	
-	public List<Member> getAllMember(Long mobileno) throws VaccineRegistrationException;   /* should use memExcp or VrExcp */
-	
-	public VaccineRegistration addVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException;
-	
-	public VaccineRegistration updateVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException;
-	
-	public boolean deleteVaccineRegistration(Integer regnum) throws VaccineRegistrationException;
 
 
 }

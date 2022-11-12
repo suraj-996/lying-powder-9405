@@ -10,6 +10,6 @@ import com.vs.model.VaccineRegistration;
 @Repository
 public interface VaccineRegistrationRepo extends JpaRepository<VaccineRegistration, Integer> {
 
-	public VaccineRegistration findByMobileno(Long mobileno, String key);
+	public VaccineRegistration findByMobileno(Long mobileno);
 
 }
