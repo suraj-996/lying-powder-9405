@@ -18,7 +18,6 @@ public class VaccineInventory {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	private Integer inventoryId;
 	private LocalDate date;
 	private String location;
@@ -31,6 +30,9 @@ public class VaccineInventory {
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<VaccinationCenter> vaccinationCenters;
 	
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
+	private List<Vaccine> vaccines;
 	public VaccineInventory() {
 		// TODO Auto-generated constructor stub
 	}

@@ -29,6 +29,9 @@ public class Vaccine {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Member member;
 
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	private VaccineInventory vaccineInventory;
 	public Vaccine() {
 		// TODO Auto-generated constructor stub
 	}

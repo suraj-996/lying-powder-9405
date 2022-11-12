@@ -7,6 +7,7 @@ import com.vs.exception.LoginException;
 import com.vs.exception.VaccineException;
 import com.vs.model.VaccineInventory;
 
+
 public interface VaccineInventoryService {
 
 //	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid,String key)throws VaccineException, LoginException;
@@ -24,4 +25,4 @@ public interface VaccineInventoryService {
 
 //	public List<VaccineInventory> getVaccineInventoryByVaccine(Vaccine vc,String key)throws VaccineException, LoginException;
 
-}
+

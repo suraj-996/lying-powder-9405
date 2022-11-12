@@ -178,12 +178,12 @@ public class UserController {
 		return new ResponseEntity<VaccineRegistration>(updateVR, HttpStatus.ACCEPTED);
 	}
 
-//	@DeleteMapping("/vaccineRegistration/{registrationNo}")
-//	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo) throws VaccineRegistrationException{
-//		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo);
-//		
-//	//	return new ResponseEntity<Boolean>(vrService.deleteVaccineRegistration(registrationNo));
-//	}
+	@DeleteMapping("/vaccineRegistration/{registrationNo}")
+	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo) throws VaccineRegistrationException{
+		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo);
+		
+		return new ResponseEntity<Boolean>(deleteVR,HttpStatus.OK);
+	}
 
 	// user can perform vaccine crud operation
 

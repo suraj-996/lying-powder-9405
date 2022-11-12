@@ -290,25 +290,30 @@ public class AdminController {
 		return new ResponseEntity<VaccineRegistration>(updateVR, HttpStatus.ACCEPTED);
 	}
 
-//	@DeleteMapping("/vaccineRegistration/{registrationNo}")
-//	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo) throws VaccineRegistrationException{
-//		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo);
-//		
-//	//	return new ResponseEntity<Boolean>(vrService.deleteVaccineRegistration(registrationNo));
-//	}
 
-	// vaccine inventory
 
-//	
-//	@GetMapping("/getInvByCenter/{centerid}")
-//	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer Centerid)throws VaccineException{
-//		
-//		
-//		VaccineInventory vaccineinventory =vaccInvSer.getVaccineInventoryByCenter(Centerid);
-//		
-//		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
-//	}
-//	
+	
+	@DeleteMapping("/vaccineRegistration/{registrationNo}")
+	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo) throws VaccineRegistrationException{
+		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo);
+		
+		return new ResponseEntity<Boolean>(deleteVR,HttpStatus.OK);
+	}
+	
+	//vaccine inventory
+	
+	
+	
+	@GetMapping("/getInvByCenter/{centerid}")
+	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer centerid)throws VaccineException{
+		
+		
+		VaccineInventory vaccineinventory =vaccInvSer.getVaccineInventoryByCenter(centerid);
+		
+		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
+	}
+	
+	
 
 	@PutMapping("/addVaccCount/{count}")
 	public ResponseEntity<VaccineInventory> addVaccineCount(@RequestBody VaccineInventory vinv,
@@ -359,20 +364,23 @@ public class AdminController {
 
 	}
 
-//	@GetMapping("/getinvByVaccname/{vaccine}")
-//	public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByVaccine(@PathVariable("vaccine") Vaccine vc)throws VaccineException{
-//		
-//		
-//		List<VaccineInventory> invList =vaccInvSer.getVaccineInventoryByVaccine(vc);
-//		
-//		if(invList.size()==0) {
-//			
-//			throw new VaccineException("inventory List is empty");
-//		}
-//		
-//		return new ResponseEntity<List<VaccineInventory>>(invList,HttpStatus.OK);
-//			
-//		
-//		
-//	}
+	
+	
+	@GetMapping("/getinvByVaccname")
+	public ResponseEntity<VaccineInventory> getVaccineInventoryByVaccine(@RequestBody Vaccine vc)throws VaccineException{
+		
+		
+		VaccineInventory invList =vaccInvSer.getVaccineInventoryByVaccine(vc);
+		
+		if(invList==null) {
+			
+			throw new VaccineException("inventory List is empty");
+		}
+		
+		return new ResponseEntity<VaccineInventory>(invList,HttpStatus.OK);
+			
+		
+		
+	}
+
 }

@@ -16,7 +16,7 @@ import com.vs.model.VaccinationCenter;
 import com.vs.model.Vaccine;
 import com.vs.model.VaccineCount;
 import com.vs.model.VaccineInventory;
-import com.vs.repo.AdminSessionRepo;
+
 import com.vs.repo.VaccineInventoryRepo;
 import com.vs.repo.VaccineRepo;
 import com.vs.service.VaccineInventoryService;
@@ -30,38 +30,30 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 	@Autowired
 	private VaccineRepo vRepo;
 
+<
 	@Autowired
 	private AdminSessionRepo adminRepo;
 
-	// private VaccinationCentreRepo vcRepo;
 
-//	@Override
-//	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid,String key) throws VaccineException ,LoginException{
+      private VaccinationCenterRepo vcRepo;
 
-//	CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
-//
-//	if(currentSessionAdmin!=null)
-//	{
+	@Override
+	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid) throws VaccineException {
+		Optional<VaccinationCenter> opt = vcRepo.findById(Centerid);
 
-//		Optional<VaccinationCenter> opt = vcRepo.findById(Centerid);
-//
-//		if (opt.isPresent()) {
-//
-//			VaccinationCenter vc = opt.get();
-//
-//			return vc.getVaccineInventory();
-//		}
-//
-//		throw new VaccineException("Enter valid center id");
+		if (opt.isPresent()) {
+>
 
-//	}else
-//	{
-//		throw new LoginException("Oops...! Login as admin first.");
-//	}
+			VaccinationCenter vc = opt.get();
 
-//		return null;
+			return vc.getVaccineInventory();
+		}else {
+			throw new VaccineException("Enter valid center id");
+		}
 
-//	}
+		
+		
+	}
 
 	@Override
 	public VaccineInventory addVaccineCount(VaccineInventory vinv, Integer count, String key)
@@ -181,46 +173,19 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 		}
 	}
 
-//	@Override
-//	public List<VaccineInventory> getVaccineInventoryByVaccine(Vaccine vc,String key) throws VaccineException, LoginException {
-//		// TODO Auto-generated method stub
 
-//	CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
-//
-//	if(currentSessionAdmin!=null)
-//	{
-//		
-//		List<VaccineInventory> inventorylist =viRepo.findAll();
-//		
-//		if(inventorylist.size()==0) {
-//			throw new VaccineException("inventoryList is empty");
-//		}
-//		
-//		List<VaccineInventory> inventorylistbyvaccinename = new ArrayList<>();
-//		
-//		for(VaccineInventory vaccineinventory: inventorylist) {
-//			
-//			if(vaccineinventory.get.getVaccineName().equalsIgnoreCase(vc.getVaccineName())) {
-//				inventorylistbyvaccinename.add(vaccineinventory);
-//			}
-//			
-//			Vaccine v=vRepo.findVaccineByName(vc.getVaccineName());
-//			
-//			
-//		}
-//		
-//		if(inventorylistbyvaccinename.size()==0) {
-//			throw new VaccineException("no such Vaccineinventory exist with vaccine name:"+vc.getVaccineName());
-//		}
-//		
 
-//		return inventorylistbyvaccinename;
-
-//	}else
-//	{
-//		throw new LoginException("Oops...! Login as admin first.");
-//	}
-
-//	}
+	@Override
+	public VaccineInventory getVaccineInventoryByVaccine(Vaccine vc) throws VaccineException {
+		// TODO Auto-generated method stub
+		
+		VaccineInventory inventorylist =viRepo.getVaccineInventoryByVaccine(vc.getVaccineId());
+		
+		if(inventorylist!=null) {
+			return inventorylist;
+		}else {
+			throw new VaccineException("Vaccine inventory not found vaccine id - "+vc.getVaccineId());
+		}
+	}
 
 }
