@@ -22,8 +22,7 @@ import com.vs.myenum.Slots;
 public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
-	private Long bookingid;
+	private Integer bookingid;
 	
 	
 //	@NotBlank(message = "Mobile Number is Mandatory")
@@ -48,7 +47,7 @@ public class Appointment {
 
 	}
 
-	public Appointment(Long bookingid, Long mobileno, LocalDate dateofbooking, Slots slots, Boolean bookingstatus,
+	public Appointment(Integer bookingid, Long mobileno, LocalDate dateofbooking, Slots slots, Boolean bookingstatus,
 			List<VaccinationCenter> vaccinationCenters) {
 		super();
 		this.bookingid = bookingid;
@@ -59,11 +58,11 @@ public class Appointment {
 		this.vaccinationCenter = vaccinationCenters;
 	}
 
-	public long getBookingid() {
+	public int getBookingid() {
 		return bookingid;
 	}
 
-	public void setBookingid(long bookingid) {
+	public void setBookingid(int bookingid) {
 		this.bookingid = bookingid;
 	}
 

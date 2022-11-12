@@ -37,11 +37,7 @@ public class VaccineRegistrationController {
 //		return new ResponseEntity<List<Member>>(members, HttpStatus.OK);
 //	}
 //	
-//	@PutMapping("/addvaccineRegistration")
-//	public ResponseEntity<VaccineRegistration> addVaccineRegistrationHandler(@RequestBody VaccineRegistration regs) throws VaccineRegistrationException{
-//		VaccineRegistration addVaccineRegistration= vrService.addVaccineRegistration(regs);
-//		return new ResponseEntity<VaccineRegistration>(addVaccineRegistration, HttpStatus.OK);
-//	}
+
 //	
 //	@PutMapping("/vaccineRegisrations")
 //	public ResponseEntity<VaccineRegistration> updateVaccineRegistrationHandler(@RequestBody VaccineRegistration vaccineRegistration) throws VaccineRegistrationException{

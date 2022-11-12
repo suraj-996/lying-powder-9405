@@ -36,12 +36,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Appointment getAppoinment(Long bookingId, String key) throws AppointmentException, UserException {
+	public Appointment getAppoinment(Integer bookingId, String key) throws AppointmentException, UserException {
 
 		CurrentUserSession currentUser = userSessionRepo.findByuuid(key);
 
 		if (currentUser != null) {
-
 			return appointmentRepo.findById(bookingId)
 					.orElseThrow(() -> new AppointmentException("Appointment not found by booking id :" + bookingId));
 		} else

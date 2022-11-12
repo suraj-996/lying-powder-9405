@@ -156,6 +156,14 @@ public class UserController {
 
 	// user can perform vaccine registration crud operation
 
+	@PostMapping("/addvaccineRegistration")
+	public ResponseEntity<VaccineRegistration> addVaccineRegistrationHandler(@RequestBody VaccineRegistration regs,
+			@RequestParam(value = "key", required = false) String key)
+			throws VaccineRegistrationException, LoginException {
+		VaccineRegistration addVaccineRegistration = vrService.addVaccineRegistration(regs, key);
+		return new ResponseEntity<VaccineRegistration>(addVaccineRegistration, HttpStatus.OK);
+	}
+
 	@GetMapping("/vaccineRegistration/{moblineno}")
 	public ResponseEntity<VaccineRegistration> getVaccineRegistrationHandler(@PathVariable("moblineno") Long mobileno,
 			@RequestParam(value = "key", required = false) String key)
@@ -179,10 +187,13 @@ public class UserController {
 	}
 
 	@DeleteMapping("/vaccineRegistration/{registrationNo}")
-	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo,@RequestParam(value = "key", required = false) String key) throws VaccineRegistrationException, LoginException{
-		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo,key);
-		
-		return new ResponseEntity<Boolean>(deleteVR,HttpStatus.OK);
+	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(
+			@PathVariable("registrationNo") Integer registrationNo,
+			@RequestParam(value = "key", required = false) String key)
+			throws VaccineRegistrationException, LoginException {
+		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo, key);
+
+		return new ResponseEntity<Boolean>(deleteVR, HttpStatus.OK);
 	}
 
 	// user can perform vaccine crud operation
@@ -307,7 +318,7 @@ public class UserController {
 	}
 
 	@GetMapping("/appointments/{bookingid}")
-	public ResponseEntity<Appointment> getAppoinment(@PathVariable("bookingid") Long bookingId,
+	public ResponseEntity<Appointment> getAppoinment(@PathVariable("bookingid") Integer bookingId,
 			@RequestParam(value = "key", required = false) String key) throws AppointmentException, UserException {
 
 		Appointment appointment = appointmentService.getAppoinment(bookingId, key);

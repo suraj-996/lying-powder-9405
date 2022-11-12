@@ -9,7 +9,7 @@ public interface AppointmentService {
 
 	public List<Appointment> getAllAppoinments() throws AppointmentException;
 
-	public Appointment getAppoinment(Long bookingId, String key) throws AppointmentException, UserException;
+	public Appointment getAppoinment(Integer bookingId, String key) throws AppointmentException, UserException;
 
 	public Appointment addAppoinment(Appointment app, String key) throws AppointmentException, UserException;
 
