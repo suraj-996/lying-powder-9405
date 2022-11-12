@@ -18,7 +18,7 @@ import com.vs.service.AppointmentService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
-@RestController
+//@RestController
 public class AppointmentController {
 
 	@Autowired

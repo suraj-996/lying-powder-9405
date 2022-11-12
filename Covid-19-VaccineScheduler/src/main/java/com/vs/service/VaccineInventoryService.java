@@ -12,7 +12,7 @@ import com.vs.model.VaccineInventory;
 
 public interface VaccineInventoryService{
 
-//	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid)throws VaccineException;
+	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid)throws VaccineException;
 		
 	public  VaccineInventory addVaccineCount(VaccineInventory vinv,Integer count)throws VaccineException;
 
@@ -23,7 +23,7 @@ public interface VaccineInventoryService{
 	public List<VaccineInventory> getVaccineInventoryByDate(LocalDate ld)throws VaccineException;
 	
 	
-//	public List<VaccineInventory> getVaccineInventoryByVaccine(Vaccine vc)throws VaccineException;
+	public VaccineInventory getVaccineInventoryByVaccine(Vaccine vc)throws VaccineException;
 	
 	
 }

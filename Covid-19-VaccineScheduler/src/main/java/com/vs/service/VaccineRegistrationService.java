@@ -19,6 +19,6 @@ public interface VaccineRegistrationService {
 	
 	public VaccineRegistration updateVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException;
 	
-	public boolean deleteVaccineRegistration(VaccineRegistration reg) throws VaccineRegistrationException;
+	public boolean deleteVaccineRegistration(Integer regnum) throws VaccineRegistrationException;
 
 }

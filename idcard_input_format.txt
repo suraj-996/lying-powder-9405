@@ -40,4 +40,4 @@ member
 
 User - Appointment, Member, Vaccine, Vaccine Center,Vaccine Registration
 
-Admin - Member, accine, Vaccine Center,Vaccine Registration,Vaccine Inventory,
+Admin - Member, Vaccine, Vaccine Center,Vaccine Registration,Vaccine Inventory,Appointment,
