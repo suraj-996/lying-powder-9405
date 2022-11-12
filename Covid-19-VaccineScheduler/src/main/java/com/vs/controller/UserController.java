@@ -15,18 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vs.exception.AppointmentException;
 import com.vs.exception.IdCardException;
 import com.vs.exception.MemberException;
 import com.vs.exception.UserException;
 import com.vs.exception.VaccineCenterException;
 import com.vs.exception.VaccineException;
 import com.vs.exception.VaccineRegistrationException;
+import com.vs.model.Appointment;
 import com.vs.model.Idcard;
 import com.vs.model.Member;
 import com.vs.model.User;
 import com.vs.model.VaccinationCenter;
 import com.vs.model.Vaccine;
 import com.vs.model.VaccineRegistration;
+import com.vs.service.AppointmentService;
 import com.vs.service.IdCardService;
 import com.vs.service.MemberService;
 import com.vs.service.UserService;
@@ -49,13 +52,17 @@ public class UserController {
 
 	@Autowired
 	private VaccineService vaccineService;
-	// user own method
 
 	@Autowired
 	private VaccinationCenterService vaccenser;
-	
+
 	@Autowired
 	private IdCardService idCardService;
+
+	@Autowired
+	private AppointmentService appointmentService;
+
+	// user own method
 
 	@PostMapping("/user")
 	public ResponseEntity<User> saveUser(@RequestBody User user) throws UserException {
@@ -218,35 +225,85 @@ public class UserController {
 
 		return allvaclist;
 	}
-	@GetMapping("/getVaccCenter/{centerId}")
-	public VaccinationCenter getVaccineCenter(@PathVariable("centerId") Integer centerId) throws VaccineCenterException {
-		
-		 VaccinationCenter vc =vaccenser.getVaccineCenter(centerId);
-		 
-		 if(vc==null) {
-			 
-				throw new VaccineCenterException("Vaccination Center does not found with center id :"+centerId);
 
-		 }
-		
-		 return vc;
+	@GetMapping("/getVaccCenter/{centerId}")
+	public VaccinationCenter getVaccineCenter(@PathVariable("centerId") Integer centerId)
+			throws VaccineCenterException {
+
+		VaccinationCenter vc = vaccenser.getVaccineCenter(centerId);
+
+		if (vc == null) {
+
+			throw new VaccineCenterException("Vaccination Center does not found with center id :" + centerId);
+
+		}
+
+		return vc;
 	}
-	
-	
-	
+
 	@GetMapping("/panNo")
-	public ResponseEntity<Idcard> getPanCardByNumberController(@RequestParam("panNo") String panNo) throws IdCardException{
-		Idcard idcard= idCardService.getPanCardByNumber(panNo);
-		return new ResponseEntity<Idcard>(idcard,HttpStatus.OK);
+	public ResponseEntity<Idcard> getPanCardByNumberController(@RequestParam("panNo") String panNo)
+			throws IdCardException {
+		Idcard idcard = idCardService.getPanCardByNumber(panNo);
+		return new ResponseEntity<Idcard>(idcard, HttpStatus.OK);
 	}
+
 	@GetMapping("/adharNo")
-	public ResponseEntity<Idcard> getAdharCardByNoController(@RequestParam("adharNo") Long adharNo) throws IdCardException{
-		Idcard idcard= idCardService.getAdharCardByNo(adharNo);
-		return new ResponseEntity<Idcard>(idcard,HttpStatus.OK);
+	public ResponseEntity<Idcard> getAdharCardByNoController(@RequestParam("adharNo") Long adharNo)
+			throws IdCardException {
+		Idcard idcard = idCardService.getAdharCardByNo(adharNo);
+		return new ResponseEntity<Idcard>(idcard, HttpStatus.OK);
 	}
+
 	@PostMapping("/idcard")
-	public ResponseEntity<Idcard> addIdCardController(@RequestBody Idcard idCard) throws IdCardException{
-		Idcard idcard= idCardService.addIdCard(idCard);
-		return new ResponseEntity<Idcard>(idcard,HttpStatus.CREATED);
+	public ResponseEntity<Idcard> addIdCardController(@RequestBody Idcard idCard) throws IdCardException {
+		Idcard idcard = idCardService.addIdCard(idCard);
+		return new ResponseEntity<Idcard>(idcard, HttpStatus.CREATED);
 	}
+
+	// Appointment method
+
+	@GetMapping("/appointments")
+	public ResponseEntity<List<Appointment>> getAllAppoinments() throws AppointmentException {
+
+		List<Appointment> appnintmentList = appointmentService.getAllAppoinments();
+
+		return new ResponseEntity<List<Appointment>>(appnintmentList, HttpStatus.OK);
+	}
+
+	@GetMapping("/appointments/{bookingid}")
+	public ResponseEntity<Appointment> getAppoinment(@PathVariable("bookingid") Long bookingId)
+			throws AppointmentException {
+
+		Appointment appointment = appointmentService.getAppoinment(bookingId);
+
+		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
+
+	}
+
+	@PostMapping("/appointments")
+	public ResponseEntity<Appointment> addAppoinment(@RequestBody Appointment app) throws AppointmentException {
+
+		Appointment appointment = appointmentService.addAppoinment(app);
+
+		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
+	}
+
+	@PutMapping("/appointments")
+	public ResponseEntity<Appointment> updateAppoinment(@RequestBody Appointment app) throws AppointmentException {
+
+		Appointment appointment = appointmentService.updateAppoinment(app);
+
+		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/appointments")
+	public ResponseEntity<Boolean> deleteAppoinment(@RequestBody Appointment app) throws AppointmentException {
+
+		Boolean result = appointmentService.deleteAppoinment(app);
+
+		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+
+	}
+
 }
