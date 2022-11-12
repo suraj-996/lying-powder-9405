@@ -8,12 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.vs.model.VaccineInventory;
 
-
 @Repository
-public interface VaccineInventoryRepo extends JpaRepository<VaccineInventory, Integer>{
+public interface VaccineInventoryRepo extends JpaRepository<VaccineInventory, Integer> {
 
 	public List<VaccineInventory> findByDate(LocalDate date);
-	
-	
-	
+
 }

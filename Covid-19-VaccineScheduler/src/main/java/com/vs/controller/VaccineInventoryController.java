@@ -22,8 +22,8 @@ import com.vs.service.VaccineInventoryService;
 //@RestController
 public class VaccineInventoryController {
 
-	@Autowired
-	private VaccineInventoryService vaccInvSer;
+//	@Autowired
+//	private VaccineInventoryService vaccInvSer;
 //	
 //	@GetMapping("/getInvByCenter/{centerid}")
 //	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer Centerid)throws VaccineException{
@@ -35,51 +35,51 @@ public class VaccineInventoryController {
 //	}
 //	
 	
-	@PutMapping("/addVaccCount/{count}")
-	public ResponseEntity<VaccineInventory> addVaccineCount(@RequestBody VaccineInventory vinv ,@PathVariable("count") Integer count)throws VaccineException{
-		
-		VaccineInventory vaccineinventory =vaccInvSer.addVaccineCount(vinv, count);
-		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
-
-	}
-	
-	
-	@PutMapping("/updateVaccinv/vinv")
-	public ResponseEntity<VaccineInventory> updateVaccineInventory(@RequestBody VaccineInventory vinv)throws VaccineException{
-		
-		VaccineInventory vaccineinventory  =vaccInvSer.updateVaccineInventory(vinv);
-		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
-
-	}
-	
-	@DeleteMapping("/deleteinv")
-	public boolean deleteVaccineInventory(@RequestBody VaccineInventory vinv)throws VaccineException{
-		
-		boolean flag  =vaccInvSer.deleteVaccineInventory(vinv);
-		
-		if(flag) {
-			return flag;
-		}
-		
-		throw new VaccineException("VaccineInventory cannot be deleted ");
-		
-		
-	}
-	
-	@GetMapping("/getVaccinvByDate/{ld}")
-	public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByDate(@PathVariable("ld") LocalDate ld)throws VaccineException{
-		
-		
-		List<VaccineInventory> invlist =vaccInvSer.getVaccineInventoryByDate(ld);
-		
-		
-		if(invlist.size()==0) {
-			throw new VaccineException("list is empty ");
-		}
-		
-		return new ResponseEntity<List<VaccineInventory>>(invlist,HttpStatus.OK);
-		
-	}
+//	@PutMapping("/addVaccCount/{count}")
+//	public ResponseEntity<VaccineInventory> addVaccineCount(@RequestBody VaccineInventory vinv ,@PathVariable("count") Integer count)throws VaccineException{
+//		
+//		VaccineInventory vaccineinventory =vaccInvSer.addVaccineCount(vinv, count);
+//		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
+//
+//	}
+//	
+//	
+//	@PutMapping("/updateVaccinv/vinv")
+//	public ResponseEntity<VaccineInventory> updateVaccineInventory(@RequestBody VaccineInventory vinv)throws VaccineException{
+//		
+//		VaccineInventory vaccineinventory  =vaccInvSer.updateVaccineInventory(vinv);
+//		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
+//
+//	}
+//	
+//	@DeleteMapping("/deleteinv")
+//	public boolean deleteVaccineInventory(@RequestBody VaccineInventory vinv)throws VaccineException{
+//		
+//		boolean flag  =vaccInvSer.deleteVaccineInventory(vinv);
+//		
+//		if(flag) {
+//			return flag;
+//		}
+//		
+//		throw new VaccineException("VaccineInventory cannot be deleted ");
+//		
+//		
+//	}
+//	
+//	@GetMapping("/getVaccinvByDate/{ld}")
+//	public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByDate(@PathVariable("ld") LocalDate ld)throws VaccineException{
+//		
+//		
+//		List<VaccineInventory> invlist =vaccInvSer.getVaccineInventoryByDate(ld);
+//		
+//		
+//		if(invlist.size()==0) {
+//			throw new VaccineException("list is empty ");
+//		}
+//		
+//		return new ResponseEntity<List<VaccineInventory>>(invlist,HttpStatus.OK);
+//		
+//	}
 	
 	
 //	@GetMapping("/getinvByVaccname/{vaccine}")

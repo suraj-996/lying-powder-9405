@@ -20,35 +20,35 @@ import com.vs.service.VaccineRegistrationService;
 //@RestController
 public class VaccineRegistrationController {
 	
-	@Autowired
-	private VaccineRegistrationService vrService;
-	
-	@GetMapping("/vaccineRegistration/{moblineno}")
-	public ResponseEntity<List<VaccineRegistration>> getVaccineRegistrationHandler(@PathVariable("moblineno") Long mobileno) throws VaccineRegistrationException{
-		
-		List<VaccineRegistration> vaccineRegistration = vrService.getVaccineRegistration(mobileno);
-		return new ResponseEntity<List<VaccineRegistration>>(vaccineRegistration, HttpStatus.OK);
-		
-	}
-	
-	@GetMapping("/getMembers/{mobileno}")
-	public ResponseEntity<List<Member>> getAllMemberHandler(@PathVariable("mobileno") Long mobileno) throws VaccineRegistrationException{
-		List<Member> members = vrService.getAllMember(mobileno);
-		return new ResponseEntity<List<Member>>(members, HttpStatus.OK);
-	}
-	
-	@PutMapping("/addvaccineRegistration")
-	public ResponseEntity<VaccineRegistration> addVaccineRegistrationHandler(@RequestBody VaccineRegistration regs) throws VaccineRegistrationException{
-		VaccineRegistration addVaccineRegistration= vrService.addVaccineRegistration(regs);
-		return new ResponseEntity<VaccineRegistration>(addVaccineRegistration, HttpStatus.OK);
-	}
-	
-	@PutMapping("/vaccineRegisrations")
-	public ResponseEntity<VaccineRegistration> updateVaccineRegistrationHandler(@RequestBody VaccineRegistration vaccineRegistration) throws VaccineRegistrationException{
-		VaccineRegistration updateVR = vrService.updateVaccineRegistration(vaccineRegistration);
-		return new ResponseEntity<VaccineRegistration>(updateVR, HttpStatus.ACCEPTED);
-	}
-	
+//	@Autowired
+//	private VaccineRegistrationService vrService;
+//	
+//	@GetMapping("/vaccineRegistration/{moblineno}")
+//	public ResponseEntity<List<VaccineRegistration>> getVaccineRegistrationHandler(@PathVariable("moblineno") Long mobileno) throws VaccineRegistrationException{
+//		
+//		List<VaccineRegistration> vaccineRegistration = vrService.getVaccineRegistration(mobileno);
+//		return new ResponseEntity<List<VaccineRegistration>>(vaccineRegistration, HttpStatus.OK);
+//		
+//	}
+//	
+//	@GetMapping("/getMembers/{mobileno}")
+//	public ResponseEntity<List<Member>> getAllMemberHandler(@PathVariable("mobileno") Long mobileno) throws VaccineRegistrationException{
+//		List<Member> members = vrService.getAllMember(mobileno);
+//		return new ResponseEntity<List<Member>>(members, HttpStatus.OK);
+//	}
+//	
+//	@PutMapping("/addvaccineRegistration")
+//	public ResponseEntity<VaccineRegistration> addVaccineRegistrationHandler(@RequestBody VaccineRegistration regs) throws VaccineRegistrationException{
+//		VaccineRegistration addVaccineRegistration= vrService.addVaccineRegistration(regs);
+//		return new ResponseEntity<VaccineRegistration>(addVaccineRegistration, HttpStatus.OK);
+//	}
+//	
+//	@PutMapping("/vaccineRegisrations")
+//	public ResponseEntity<VaccineRegistration> updateVaccineRegistrationHandler(@RequestBody VaccineRegistration vaccineRegistration) throws VaccineRegistrationException{
+//		VaccineRegistration updateVR = vrService.updateVaccineRegistration(vaccineRegistration);
+//		return new ResponseEntity<VaccineRegistration>(updateVR, HttpStatus.ACCEPTED);
+//	}
+//	
 //	@DeleteMapping("/vaccineRegistration/{registrationNo}")
 //	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo) throws VaccineRegistrationException{
 //		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo);

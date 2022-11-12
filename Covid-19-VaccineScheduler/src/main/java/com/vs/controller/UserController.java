@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.exception.AppointmentException;
 import com.vs.exception.IdCardException;
+import com.vs.exception.LoginException;
 import com.vs.exception.MemberException;
 import com.vs.exception.UserException;
 import com.vs.exception.VaccineCenterException;
@@ -94,54 +95,60 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/members/{memberId}")
-	public ResponseEntity<Member> getMemberById(@PathVariable("memberId") Integer memberId) throws MemberException {
+	public ResponseEntity<Member> getMemberById(@PathVariable("memberId") Integer memberId,
+			@RequestParam(required = false) String key) throws MemberException, LoginException {
 
-		Member member = memberService.getMemberById(memberId);
+		Member member = memberService.getMemberById(memberId, key);
 
 		return new ResponseEntity<Member>(member, HttpStatus.OK);
 
 	}
 
 	@GetMapping(value = "/membersbyaadhar/{aadhar}")
-	public ResponseEntity<Member> getMemberByAadharNo(@PathVariable("aadhar") Long aadharNo) throws MemberException {
+	public ResponseEntity<Member> getMemberByAadharNo(@PathVariable("aadhar") Long aadharNo,
+			@RequestParam(required = false) String key) throws MemberException, LoginException {
 
-		Member member = memberService.getMemberByAadharNo(aadharNo);
+		Member member = memberService.getMemberByAadharNo(aadharNo, key);
 
 		return new ResponseEntity<Member>(member, HttpStatus.OK);
 
 	}
 
 	@GetMapping(value = "/membersbypan/{pan}")
-	public ResponseEntity<Member> getMemberByPanNo(@PathVariable("pan") String panNo) throws MemberException {
+	public ResponseEntity<Member> getMemberByPanNo(@PathVariable("pan") String panNo,
+			@RequestParam(required = false) String key) throws MemberException, LoginException {
 
-		Member member = memberService.getMemberByPanNo(panNo);
+		Member member = memberService.getMemberByPanNo(panNo, key);
 
 		return new ResponseEntity<Member>(member, HttpStatus.OK);
 
 	}
 
 	@PostMapping(value = "/members")
-	public ResponseEntity<Member> addMember(@RequestBody Member member) throws MemberException {
+	public ResponseEntity<Member> addMember(@RequestBody Member member, @RequestParam(required = false) String key)
+			throws MemberException, LoginException {
 
-		Member addedMember = memberService.addMember(member);
+		Member addedMember = memberService.addMember(member, key);
 
 		return new ResponseEntity<Member>(addedMember, HttpStatus.OK);
 
 	}
 
 	@PutMapping(value = "/members")
-	public ResponseEntity<Member> updateMember(@RequestBody Member member) throws MemberException {
+	public ResponseEntity<Member> updateMember(@RequestBody Member member, @RequestParam(required = false) String key)
+			throws MemberException, LoginException {
 
-		Member updatedMember = memberService.updateMember(member);
+		Member updatedMember = memberService.updateMember(member, key);
 
 		return new ResponseEntity<Member>(updatedMember, HttpStatus.OK);
 
 	}
 
 	@DeleteMapping(value = "/members")
-	public ResponseEntity<Boolean> deleteMember(@RequestBody Member member) throws MemberException {
+	public ResponseEntity<Boolean> deleteMember(@RequestBody Member member, @RequestParam(required = false) String key)
+			throws MemberException, LoginException {
 
-		Boolean ans = memberService.deleteMember(member);
+		Boolean ans = memberService.deleteMember(member, key);
 
 		return new ResponseEntity<Boolean>(ans, HttpStatus.OK);
 
@@ -150,18 +157,24 @@ public class UserController {
 	// user can perform vaccine registration crud operation
 
 	@GetMapping("/vaccineRegistration/{moblineno}")
-	public ResponseEntity<List<VaccineRegistration>> getVaccineRegistrationHandler(
-			@PathVariable("moblineno") Long mobileno) throws VaccineRegistrationException {
+	public ResponseEntity<VaccineRegistration> getVaccineRegistrationHandler(@PathVariable("moblineno") Long mobileno,
+			@RequestParam(value = "key", required = false) String key)
+			throws VaccineRegistrationException, LoginException {
 
-		List<VaccineRegistration> vaccineRegistration = vrService.getVaccineRegistration(mobileno);
-		return new ResponseEntity<List<VaccineRegistration>>(vaccineRegistration, HttpStatus.OK);
+		VaccineRegistration vaccineRegistration = vrService.getVaccineRegistration(mobileno, key);
+
+		return new ResponseEntity<VaccineRegistration>(vaccineRegistration, HttpStatus.OK);
 
 	}
 
 	@PutMapping("/vaccineRegisrations")
 	public ResponseEntity<VaccineRegistration> updateVaccineRegistrationHandler(
-			@RequestBody VaccineRegistration vaccineRegistration) throws VaccineRegistrationException {
-		VaccineRegistration updateVR = vrService.updateVaccineRegistration(vaccineRegistration);
+			@RequestBody VaccineRegistration vaccineRegistration,
+			@RequestParam(value = "key", required = false) String key)
+			throws VaccineRegistrationException, LoginException {
+
+		VaccineRegistration updateVR = vrService.updateVaccineRegistration(vaccineRegistration, key);
+
 		return new ResponseEntity<VaccineRegistration>(updateVR, HttpStatus.ACCEPTED);
 	}
 
@@ -181,35 +194,47 @@ public class UserController {
 	}
 
 	@GetMapping("/vaccine")
-	public ResponseEntity<List<Vaccine>> getVaccineByNameController(@RequestParam("vaccineName") String vaccineName)
-			throws VaccineException {
-		List<Vaccine> vaccines = vaccineService.getVaccineByName(vaccineName);
+	public ResponseEntity<List<Vaccine>> getVaccineByNameController(@RequestParam("vaccineName") String vaccineName,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		List<Vaccine> vaccines = vaccineService.getVaccineByName(vaccineName, key);
+
 		return new ResponseEntity<List<Vaccine>>(vaccines, HttpStatus.OK);
 	}
 
 	@GetMapping("/vaccine/{vaccineId}")
-	public ResponseEntity<Vaccine> getVaccineByIdController(@PathVariable("vaccineId") Integer vaccineId)
-			throws VaccineException {
-		Vaccine vaccine = vaccineService.getVaccineById(vaccineId);
+	public ResponseEntity<Vaccine> getVaccineByIdController(@PathVariable("vaccineId") Integer vaccineId,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		Vaccine vaccine = vaccineService.getVaccineById(vaccineId, key);
+
 		return new ResponseEntity<Vaccine>(vaccine, HttpStatus.OK);
 	}
 
 	@PostMapping("/vaccines")
-	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine) throws VaccineException {
-		Vaccine vacc = vaccineService.addVaccine(vaccine);
+	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		Vaccine vacc = vaccineService.addVaccine(vaccine, key);
+
 		return new ResponseEntity<Vaccine>(vacc, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/vaccines")
-	public ResponseEntity<Vaccine> updateVaccineController(@RequestBody Vaccine vaccine) throws VaccineException {
-		Vaccine vacc = vaccineService.updateVaccine(vaccine);
+	public ResponseEntity<Vaccine> updateVaccineController(@RequestBody Vaccine vaccine,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		Vaccine vacc = vaccineService.updateVaccine(vaccine, key);
+
 		return new ResponseEntity<Vaccine>(vacc, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/vaccines/{vaccineId}")
-	public ResponseEntity<Boolean> deleteVaccineController(@PathVariable("vaccineId") Integer vaccineId)
-			throws VaccineException {
-		Boolean ans = vaccineService.deleteVaccine(vaccineId);
+	public ResponseEntity<Boolean> deleteVaccineController(@PathVariable("vaccineId") Integer vaccineId,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		Boolean ans = vaccineService.deleteVaccine(vaccineId, key);
+
 		return new ResponseEntity<Boolean>(ans, HttpStatus.OK);
 	}
 
@@ -227,10 +252,10 @@ public class UserController {
 	}
 
 	@GetMapping("/getVaccCenter/{centerId}")
-	public VaccinationCenter getVaccineCenter(@PathVariable("centerId") Integer centerId)
-			throws VaccineCenterException {
+	public VaccinationCenter getVaccineCenter(@PathVariable("centerId") Integer centerId,
+			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
 
-		VaccinationCenter vc = vaccenser.getVaccineCenter(centerId);
+		VaccinationCenter vc = vaccenser.getVaccineCenter(centerId, key);
 
 		if (vc == null) {
 
@@ -242,23 +267,33 @@ public class UserController {
 	}
 
 	@GetMapping("/panNo")
-	public ResponseEntity<Idcard> getPanCardByNumberController(@RequestParam("panNo") String panNo)
-			throws IdCardException {
-		Idcard idcard = idCardService.getPanCardByNumber(panNo);
+	public ResponseEntity<Idcard> getPanCardByNumberController(@RequestParam("panNo") String panNo,
+			@RequestParam(value = "key", required = false) String key) throws IdCardException, UserException {
+
+		Idcard idcard = idCardService.getPanCardByNumber(panNo, key);
+
 		return new ResponseEntity<Idcard>(idcard, HttpStatus.OK);
+
 	}
 
 	@GetMapping("/adharNo")
-	public ResponseEntity<Idcard> getAdharCardByNoController(@RequestParam("adharNo") Long adharNo)
-			throws IdCardException {
-		Idcard idcard = idCardService.getAdharCardByNo(adharNo);
+	public ResponseEntity<Idcard> getAdharCardByNoController(@RequestParam("adharNo") Long adharNo,
+			@RequestParam(value = "key", required = false) String key) throws IdCardException, UserException {
+
+		Idcard idcard = idCardService.getAdharCardByNo(adharNo, key);
+
 		return new ResponseEntity<Idcard>(idcard, HttpStatus.OK);
+
 	}
 
 	@PostMapping("/idcard")
-	public ResponseEntity<Idcard> addIdCardController(@RequestBody Idcard idCard) throws IdCardException {
-		Idcard idcard = idCardService.addIdCard(idCard);
+	public ResponseEntity<Idcard> addIdCardController(@RequestBody Idcard idCard,
+			@RequestParam(value = "key", required = false) String key) throws IdCardException, UserException {
+
+		Idcard idcard = idCardService.addIdCard(idCard, key);
+
 		return new ResponseEntity<Idcard>(idcard, HttpStatus.CREATED);
+
 	}
 
 	// Appointment method
@@ -272,35 +307,38 @@ public class UserController {
 	}
 
 	@GetMapping("/appointments/{bookingid}")
-	public ResponseEntity<Appointment> getAppoinment(@PathVariable("bookingid") Long bookingId)
-			throws AppointmentException {
+	public ResponseEntity<Appointment> getAppoinment(@PathVariable("bookingid") Long bookingId,
+			@RequestParam(value = "key", required = false) String key) throws AppointmentException, UserException {
 
-		Appointment appointment = appointmentService.getAppoinment(bookingId);
+		Appointment appointment = appointmentService.getAppoinment(bookingId, key);
 
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
 
 	}
 
 	@PostMapping("/appointments")
-	public ResponseEntity<Appointment> addAppoinment(@RequestBody Appointment app) throws AppointmentException {
+	public ResponseEntity<Appointment> addAppoinment(@RequestBody Appointment app,
+			@RequestParam(value = "key", required = false) String key) throws AppointmentException, UserException {
 
-		Appointment appointment = appointmentService.addAppoinment(app);
+		Appointment appointment = appointmentService.addAppoinment(app, key);
 
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
 	}
 
 	@PutMapping("/appointments")
-	public ResponseEntity<Appointment> updateAppoinment(@RequestBody Appointment app) throws AppointmentException {
+	public ResponseEntity<Appointment> updateAppoinment(@RequestBody Appointment app,
+			@RequestParam(value = "key", required = false) String key) throws AppointmentException, UserException {
 
-		Appointment appointment = appointmentService.updateAppoinment(app);
+		Appointment appointment = appointmentService.updateAppoinment(app, key);
 
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/appointments")
-	public ResponseEntity<Boolean> deleteAppoinment(@RequestBody Appointment app) throws AppointmentException {
+	public ResponseEntity<Boolean> deleteAppoinment(@RequestBody Appointment app,
+			@RequestParam(value = "key", required = false) String key) throws AppointmentException, UserException {
 
-		Boolean result = appointmentService.deleteAppoinment(app);
+		Boolean result = appointmentService.deleteAppoinment(app, key);
 
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 

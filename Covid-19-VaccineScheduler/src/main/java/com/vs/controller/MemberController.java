@@ -22,26 +22,26 @@ import com.vs.service.MemberService;
 //@RequestMapping(value = "/member")
 public class MemberController {
 
-	@Autowired
-	private MemberService memberService;
-
-	@GetMapping(value = "/members")
-	public ResponseEntity<List<Member>> getAllMembers() throws MemberException {
-
-		List<Member> members = memberService.getAllMembers();
-
-		return new ResponseEntity<List<Member>>(members, HttpStatus.OK);
-
-	}
-
-	@GetMapping(value = "/members/{memberId}")
-	public ResponseEntity<Member> getMemberById(@PathVariable("memberId") Integer memberId) throws MemberException {
-
-		Member member = memberService.getMemberById(memberId);
-
-		return new ResponseEntity<Member>(member, HttpStatus.OK);
-
-	}
+//	@Autowired
+//	private MemberService memberService;
+//
+//	@GetMapping(value = "/members")
+//	public ResponseEntity<List<Member>> getAllMembers() throws MemberException {
+//
+//		List<Member> members = memberService.getAllMembers();
+//
+//		return new ResponseEntity<List<Member>>(members, HttpStatus.OK);
+//
+//	}
+//
+//	@GetMapping(value = "/members/{memberId}")
+//	public ResponseEntity<Member> getMemberById(@PathVariable("memberId") Integer memberId) throws MemberException {
+//
+//		Member member = memberService.getMemberById(memberId);
+//
+//		return new ResponseEntity<Member>(member, HttpStatus.OK);
+//
+//	}
 
 //	@GetMapping(value = "/membersbyaadhar/{aadhar}")
 //	public ResponseEntity<Member> getMemberByAadharNo(@PathVariable("aadhar") Long aadharNo) throws MemberException {
@@ -60,32 +60,32 @@ public class MemberController {
 //		return new ResponseEntity<Member>(member, HttpStatus.OK);
 //
 //	}
-
-	@PostMapping(value = "/members")
-	public ResponseEntity<Member> addMember(@RequestBody Member member) throws MemberException {
-
-		Member addedMember = memberService.addMember(member);
-
-		return new ResponseEntity<Member>(addedMember, HttpStatus.OK);
-
-	}
-
-	@PutMapping(value = "/members")
-	public ResponseEntity<Member> updateMember(@RequestBody Member member) throws MemberException {
-
-		Member updatedMember = memberService.updateMember(member);
-
-		return new ResponseEntity<Member>(updatedMember, HttpStatus.OK);
-
-	}
-
-	@DeleteMapping(value = "/members")
-	public ResponseEntity<Boolean> deleteMember(@RequestBody Member member) throws MemberException {
-
-		Boolean ans = memberService.deleteMember(member);
-
-		return new ResponseEntity<Boolean>(ans, HttpStatus.OK);
-
-	}
+//
+//	@PostMapping(value = "/members")
+//	public ResponseEntity<Member> addMember(@RequestBody Member member) throws MemberException {
+//
+//		Member addedMember = memberService.addMember(member);
+//
+//		return new ResponseEntity<Member>(addedMember, HttpStatus.OK);
+//
+//	}
+//
+//	@PutMapping(value = "/members")
+//	public ResponseEntity<Member> updateMember(@RequestBody Member member) throws MemberException {
+//
+//		Member updatedMember = memberService.updateMember(member);
+//
+//		return new ResponseEntity<Member>(updatedMember, HttpStatus.OK);
+//
+//	}
+//
+//	@DeleteMapping(value = "/members")
+//	public ResponseEntity<Boolean> deleteMember(@RequestBody Member member) throws MemberException {
+//
+//		Boolean ans = memberService.deleteMember(member);
+//
+//		return new ResponseEntity<Boolean>(ans, HttpStatus.OK);
+//
+//	}
 
 }

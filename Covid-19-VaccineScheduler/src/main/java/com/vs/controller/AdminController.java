@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vs.exception.AdminException;
+import com.vs.exception.LoginException;
 import com.vs.exception.MemberException;
 import com.vs.exception.VaccineCenterException;
 import com.vs.exception.VaccineException;
@@ -39,22 +40,22 @@ import com.vs.service.VaccineService;
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private VaccineService vaccineService;
-	
 
 	@Autowired
 	private VaccinationCenterService vaccenser;
-	
+
 	@Autowired
 	private VaccineRegistrationService vrService;
-	
+
 	@Autowired
 	private VaccineInventoryService vaccInvSer;
+
 	@PostMapping("/admin")
 	public ResponseEntity<Admin> saveUser(@RequestBody Admin admin) throws AdminException {
 
@@ -72,8 +73,8 @@ public class AdminController {
 		return new ResponseEntity<Admin>(updatedCustomer, HttpStatus.OK);
 
 	}
-	
-	//member method
+
+	// member method
 
 	@GetMapping(value = "/members")
 	public ResponseEntity<List<Member>> getAllMembers() throws MemberException {
@@ -85,206 +86,219 @@ public class AdminController {
 	}
 
 	@GetMapping(value = "/members/{memberId}")
-	public ResponseEntity<Member> getMemberById(@PathVariable("memberId") Integer memberId) throws MemberException {
+	public ResponseEntity<Member> getMemberById(@PathVariable("memberId") Integer memberId,
+			@RequestParam(required = false) String key) throws MemberException, LoginException {
 
-		Member member = memberService.getMemberById(memberId);
+		Member member = memberService.getMemberById(memberId, key);
 
 		return new ResponseEntity<Member>(member, HttpStatus.OK);
 
 	}
 
 	@GetMapping(value = "/membersbyaadhar/{aadhar}")
-	public ResponseEntity<Member> getMemberByAadharNo(@PathVariable("aadhar") Long aadharNo) throws MemberException {
+	public ResponseEntity<Member> getMemberByAadharNo(@PathVariable("aadhar") Long aadharNo,
+			@RequestParam(required = false) String key) throws MemberException, LoginException {
 
-		Member member = memberService.getMemberByAadharNo(aadharNo);
+		Member member = memberService.getMemberByAadharNo(aadharNo, key);
 
 		return new ResponseEntity<Member>(member, HttpStatus.OK);
 
 	}
 
 	@GetMapping(value = "/membersbypan/{pan}")
-	public ResponseEntity<Member> getMemberByPanNo(@PathVariable("pan") String panNo) throws MemberException {
+	public ResponseEntity<Member> getMemberByPanNo(@PathVariable("pan") String panNo,
+			@RequestParam(required = false) String key) throws MemberException, LoginException {
 
-		Member member = memberService.getMemberByPanNo(panNo);
+		Member member = memberService.getMemberByPanNo(panNo, key);
 
 		return new ResponseEntity<Member>(member, HttpStatus.OK);
 
 	}
 
 	@PostMapping(value = "/members")
-	public ResponseEntity<Member> addMember(@RequestBody Member member) throws MemberException {
+	public ResponseEntity<Member> addMember(@RequestBody Member member, @RequestParam(required = false) String key)
+			throws MemberException, LoginException {
 
-		Member addedMember = memberService.addMember(member);
+		Member addedMember = memberService.addMember(member, key);
 
 		return new ResponseEntity<Member>(addedMember, HttpStatus.OK);
 
 	}
 
 	@PutMapping(value = "/members")
-	public ResponseEntity<Member> updateMember(@RequestBody Member member) throws MemberException {
+	public ResponseEntity<Member> updateMember(@RequestBody Member member, @RequestParam(required = false) String key)
+			throws MemberException, LoginException {
 
-		Member updatedMember = memberService.updateMember(member);
+		Member updatedMember = memberService.updateMember(member, key);
 
 		return new ResponseEntity<Member>(updatedMember, HttpStatus.OK);
 
 	}
 
 	@DeleteMapping(value = "/members")
-	public ResponseEntity<Boolean> deleteMember(@RequestBody Member member) throws MemberException {
+	public ResponseEntity<Boolean> deleteMember(@RequestBody Member member, @RequestParam(required = false) String key)
+			throws MemberException, LoginException {
 
-		Boolean ans = memberService.deleteMember(member);
+		Boolean ans = memberService.deleteMember(member, key);
 
 		return new ResponseEntity<Boolean>(ans, HttpStatus.OK);
 
 	}
-	
-	//vaccine method
-	
-	
-	
-	@GetMapping("/vaccines")
-	public ResponseEntity<List<Vaccine>> allVaccineController() throws VaccineException{
-		List<Vaccine> vaccines= vaccineService.allVaccines();
-		return new ResponseEntity<List<Vaccine>>(vaccines,HttpStatus.OK);
-	}
-	
-	@GetMapping("/vaccine")
-	public ResponseEntity<List<Vaccine>> getVaccineByNameController(@RequestParam("vaccineName") String vaccineName) throws VaccineException{
-		List<Vaccine> vaccines=vaccineService.getVaccineByName(vaccineName);
-		return new ResponseEntity<List<Vaccine>>(vaccines,HttpStatus.OK);
-	}
-	
-	@GetMapping("/vaccine/{vaccineId}")
-	public ResponseEntity<Vaccine> getVaccineByIdController(@PathVariable("vaccineId") Integer vaccineId) throws VaccineException{
-		Vaccine vaccine=vaccineService.getVaccineById(vaccineId);
-		return new ResponseEntity<Vaccine>(vaccine,HttpStatus.OK);
-	}
-	
-	@PostMapping("/vaccines")
-	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine) throws VaccineException{
-		Vaccine vacc=vaccineService.addVaccine(vaccine);
-		return new ResponseEntity<Vaccine>(vacc,HttpStatus.CREATED);
-	}
-	
-	@PutMapping("/vaccines")
-	public ResponseEntity<Vaccine> updateVaccineController(@RequestBody Vaccine vaccine) throws VaccineException{
-		Vaccine vacc=vaccineService.updateVaccine(vaccine);
-		return new ResponseEntity<Vaccine>(vacc,HttpStatus.OK);
-	}
-	
-	@DeleteMapping("/vaccines/{vaccineId}")
-	public ResponseEntity<Boolean> deleteVaccineController(@PathVariable("vaccineId") Integer vaccineId) throws VaccineException{
-		Boolean ans=vaccineService.deleteVaccine(vaccineId);
-		return new ResponseEntity<Boolean>(ans,HttpStatus.OK);
-	}
-	
-	
-	//vaccine center 
-	
 
+	// vaccine method
+
+	@GetMapping("/vaccines")
+	public ResponseEntity<List<Vaccine>> allVaccineController() throws VaccineException {
+
+		List<Vaccine> vaccines = vaccineService.allVaccines();
+
+		return new ResponseEntity<List<Vaccine>>(vaccines, HttpStatus.OK);
+	}
+
+	@GetMapping("/vaccine")
+	public ResponseEntity<List<Vaccine>> getVaccineByNameController(@RequestParam("vaccineName") String vaccineName,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		List<Vaccine> vaccines = vaccineService.getVaccineByName(vaccineName, key);
+
+		return new ResponseEntity<List<Vaccine>>(vaccines, HttpStatus.OK);
+	}
+
+	@GetMapping("/vaccine/{vaccineId}")
+	public ResponseEntity<Vaccine> getVaccineByIdController(@PathVariable("vaccineId") Integer vaccineId,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		Vaccine vaccine = vaccineService.getVaccineById(vaccineId, key);
+
+		return new ResponseEntity<Vaccine>(vaccine, HttpStatus.OK);
+	}
+
+	@PostMapping("/vaccines")
+	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		Vaccine vacc = vaccineService.addVaccine(vaccine, key);
+
+		return new ResponseEntity<Vaccine>(vacc, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/vaccines")
+	public ResponseEntity<Vaccine> updateVaccineController(@RequestBody Vaccine vaccine,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		Vaccine vacc = vaccineService.updateVaccine(vaccine, key);
+
+		return new ResponseEntity<Vaccine>(vacc, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/vaccines/{vaccineId}")
+	public ResponseEntity<Boolean> deleteVaccineController(@PathVariable("vaccineId") Integer vaccineId,
+			@RequestParam(required = false) String key) throws VaccineException, LoginException {
+
+		Boolean ans = vaccineService.deleteVaccine(vaccineId, key);
+
+		return new ResponseEntity<Boolean>(ans, HttpStatus.OK);
+	}
+
+	// vaccine center
 
 	@GetMapping("/getVaccCenter")
 	public List<VaccinationCenter> getAllVaccineCenters() throws VaccineCenterException {
-		
-		
+
 		List<VaccinationCenter> allvaclist = vaccenser.getAllVaccineCenters();
-		
-		if(allvaclist.size()==0) {
+
+		if (allvaclist.size() == 0) {
 			throw new VaccineCenterException("No Vaccine Centers availavle");
 		}
-		
+
 		return allvaclist;
 	}
 
 	@GetMapping("/getVaccCenter/{centerId}")
-	public VaccinationCenter getVaccineCenter(@PathVariable("centerId") Integer centerId) throws VaccineCenterException {
-		
-		 VaccinationCenter vc =vaccenser.getVaccineCenter(centerId);
-		 
-		 if(vc==null) {
-			 
-				throw new VaccineCenterException("Vaccination Center does not found with center id :"+centerId);
+	public VaccinationCenter getVaccineCenter(@PathVariable("centerId") Integer centerId,
+			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
 
-		 }
-		
-		 return vc;
+		VaccinationCenter vc = vaccenser.getVaccineCenter(centerId, key);
+
+		if (vc == null) {
+
+			throw new VaccineCenterException("Vaccination Center does not found with center id :" + centerId);
+
+		}
+
+		return vc;
 	}
 
-	
-	public VaccinationCenter addVaccinationCenter(VaccinationCenter center) throws VaccineCenterException {
-	
-		
-		
-		VaccinationCenter vc =vaccenser.addVaccinationCenter(center);
-		
-		if(vc!=null) {
+	public VaccinationCenter addVaccinationCenter(VaccinationCenter center,
+			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
+
+		VaccinationCenter vc = vaccenser.addVaccinationCenter(center, key);
+
+		if (vc != null) {
 			return vc;
 		}
-		
-			
-			throw new VaccineCenterException("sorry this Vaccination center already exist");
-		
-		
+
+		throw new VaccineCenterException("sorry this Vaccination center already exist");
+
 	}
 
-	
-	
-	public VaccinationCenter updateVaccinationCenter(VaccinationCenter center) throws VaccineCenterException {
-		
-		
-		VaccinationCenter vc =vaccenser.updateVaccinationCenter(center);
-		
-		if(vc==null)
+	public VaccinationCenter updateVaccinationCenter(VaccinationCenter center,
+			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
+
+		VaccinationCenter vc = vaccenser.updateVaccinationCenter(center, key);
+
+		if (vc == null)
 			return vc;
-		
-		
+
 		throw new VaccineCenterException("Vaccination Center does not exist to update");
-		
-		
+
 	}
 
-	
-	public boolean deleteVaccinationCenter(VaccinationCenter center) throws VaccineCenterException {
-		
-		
-		
-	boolean flag =vaccenser.deleteVaccinationCenter(center);
-		
-		if(flag)
+	public boolean deleteVaccinationCenter(VaccinationCenter center,
+			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
+
+		boolean flag = vaccenser.deleteVaccinationCenter(center, key);
+
+		if (flag)
 			return flag;
-		
+
 		throw new VaccineCenterException("Vaccination Center cannot be deleted ");
-		
+
 	}
-	
-	//vaccine registration 
-	
-	
-	
+
+	// vaccine registration
+
 	@GetMapping("/vaccineRegistration/{moblineno}")
-	public ResponseEntity<List<VaccineRegistration>> getVaccineRegistrationHandler(@PathVariable("moblineno") Long mobileno) throws VaccineRegistrationException{
-		
-		List<VaccineRegistration> vaccineRegistration = vrService.getVaccineRegistration(mobileno);
-		return new ResponseEntity<List<VaccineRegistration>>(vaccineRegistration, HttpStatus.OK);
-		
+	public ResponseEntity<VaccineRegistration> getVaccineRegistrationHandler(@PathVariable("moblineno") Long mobileno,
+			@RequestParam(value = "key", required = false) String key)
+			throws VaccineRegistrationException, LoginException {
+
+		VaccineRegistration vaccineRegistration = vrService.getVaccineRegistration(mobileno, key);
+
+		return new ResponseEntity<VaccineRegistration>(vaccineRegistration, HttpStatus.OK);
+
 	}
-	
+
 	@PutMapping("/vaccineRegisrations")
-	public ResponseEntity<VaccineRegistration> updateVaccineRegistrationHandler(@RequestBody VaccineRegistration vaccineRegistration) throws VaccineRegistrationException{
-		VaccineRegistration updateVR = vrService.updateVaccineRegistration(vaccineRegistration);
+	public ResponseEntity<VaccineRegistration> updateVaccineRegistrationHandler(
+			@RequestBody VaccineRegistration vaccineRegistration,
+			@RequestParam(value = "key", required = false) String key)
+			throws VaccineRegistrationException, LoginException {
+
+		VaccineRegistration updateVR = vrService.updateVaccineRegistration(vaccineRegistration, key);
+
 		return new ResponseEntity<VaccineRegistration>(updateVR, HttpStatus.ACCEPTED);
 	}
-	
+
 //	@DeleteMapping("/vaccineRegistration/{registrationNo}")
 //	public ResponseEntity<Boolean> deleteVaccineRegistrationHandler(@PathVariable("registrationNo") Integer registrationNo) throws VaccineRegistrationException{
 //		Boolean deleteVR = vrService.deleteVaccineRegistration(registrationNo);
 //		
 //	//	return new ResponseEntity<Boolean>(vrService.deleteVaccineRegistration(registrationNo));
 //	}
-	
-	//vaccine inventory
-	
-	
+
+	// vaccine inventory
+
 //	
 //	@GetMapping("/getInvByCenter/{centerid}")
 //	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer Centerid)throws VaccineException{
@@ -295,54 +309,56 @@ public class AdminController {
 //		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
 //	}
 //	
-	
+
 	@PutMapping("/addVaccCount/{count}")
-	public ResponseEntity<VaccineInventory> addVaccineCount(@RequestBody VaccineInventory vinv ,@PathVariable("count") Integer count)throws VaccineException{
-		
-		VaccineInventory vaccineinventory =vaccInvSer.addVaccineCount(vinv, count);
-		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
+	public ResponseEntity<VaccineInventory> addVaccineCount(@RequestBody VaccineInventory vinv,
+			@PathVariable("count") Integer count, @RequestParam(value = "key", required = false) String key)
+			throws VaccineException, LoginException {
+
+		VaccineInventory vaccineinventory = vaccInvSer.addVaccineCount(vinv, count, key);
+
+		return new ResponseEntity<VaccineInventory>(vaccineinventory, HttpStatus.OK);
 
 	}
-	
-	
+
 	@PutMapping("/updateVaccinv/vinv")
-	public ResponseEntity<VaccineInventory> updateVaccineInventory(@RequestBody VaccineInventory vinv)throws VaccineException{
-		
-		VaccineInventory vaccineinventory  =vaccInvSer.updateVaccineInventory(vinv);
-		return new ResponseEntity<VaccineInventory>(vaccineinventory,HttpStatus.OK);
+	public ResponseEntity<VaccineInventory> updateVaccineInventory(@RequestBody VaccineInventory vinv,
+			@RequestParam(value = "key", required = false) String key) throws VaccineException, LoginException {
+
+		VaccineInventory vaccineinventory = vaccInvSer.updateVaccineInventory(vinv, key);
+
+		return new ResponseEntity<VaccineInventory>(vaccineinventory, HttpStatus.OK);
 
 	}
-	
+
 	@DeleteMapping("/deleteinv")
-	public boolean deleteVaccineInventory(@RequestBody VaccineInventory vinv)throws VaccineException{
-		
-		boolean flag  =vaccInvSer.deleteVaccineInventory(vinv);
-		
-		if(flag) {
+	public boolean deleteVaccineInventory(@RequestBody VaccineInventory vinv,
+			@RequestParam(value = "key", required = false) String key) throws VaccineException, LoginException {
+
+		boolean flag = vaccInvSer.deleteVaccineInventory(vinv, key);
+
+		if (flag) {
 			return flag;
 		}
-		
+
 		throw new VaccineException("VaccineInventory cannot be deleted ");
-		
-		
+
 	}
-	
+
 	@GetMapping("/getVaccinvByDate/{ld}")
-	public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByDate(@PathVariable("ld") LocalDate ld)throws VaccineException{
-		
-		
-		List<VaccineInventory> invlist =vaccInvSer.getVaccineInventoryByDate(ld);
-		
-		
-		if(invlist.size()==0) {
+	public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByDate(@PathVariable("ld") LocalDate ld,
+			@RequestParam(value = "key", required = false) String key) throws VaccineException, LoginException {
+
+		List<VaccineInventory> invlist = vaccInvSer.getVaccineInventoryByDate(ld, key);
+
+		if (invlist.size() == 0) {
 			throw new VaccineException("list is empty ");
 		}
-		
-		return new ResponseEntity<List<VaccineInventory>>(invlist,HttpStatus.OK);
-		
+
+		return new ResponseEntity<List<VaccineInventory>>(invlist, HttpStatus.OK);
+
 	}
-	
-	
+
 //	@GetMapping("/getinvByVaccname/{vaccine}")
 //	public ResponseEntity<List<VaccineInventory>> getVaccineInventoryByVaccine(@PathVariable("vaccine") Vaccine vc)throws VaccineException{
 //		

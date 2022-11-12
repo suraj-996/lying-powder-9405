@@ -6,9 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vs.exception.LoginException;
 import com.vs.exception.MemberException;
+import com.vs.model.CurrentAdminSession;
+import com.vs.model.CurrentUserSession;
 import com.vs.model.Member;
+import com.vs.repo.AdminSessionRepo;
 import com.vs.repo.MemberRepo;
+import com.vs.repo.UserSessionRepo;
 import com.vs.service.MemberService;
 
 @Service
@@ -16,6 +21,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepo memberRepo;
+
+	@Autowired
+	private AdminSessionRepo adminRepo;
+
+	@Autowired
+	private UserSessionRepo userRepo;
 
 	@Override
 	public List<Member> getAllMembers() throws MemberException {
@@ -34,123 +45,172 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member getMemberById(Integer memberId) throws MemberException {
+	public Member getMemberById(Integer memberId, String key) throws MemberException, LoginException {
 
-		Optional<Member> optional = memberRepo.findById(memberId);
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
-		if (optional.isPresent()) {
+		CurrentUserSession currentSessionUser = userRepo.findByuuid(key);
 
-			Member member = optional.get();
+		if (currentSessionAdmin != null || currentSessionUser != null) {
 
-			return member;
+			Optional<Member> optional = memberRepo.findById(memberId);
 
-		} else {
+			if (optional.isPresent()) {
 
-			throw new MemberException("No any member found with Id : " + memberId);
+				Member member = optional.get();
 
-		}
+				return member;
+
+			} else {
+
+				throw new MemberException("No any member found with Id : " + memberId);
+
+			}
+		} else
+			throw new LoginException("Oops...! Log in as an admin/user first.");
 
 	}
 
 	@Override
-	public Member getMemberByAadharNo(Long aadharNo) throws MemberException {
+	public Member getMemberByAadharNo(Long aadharNo, String key) throws MemberException, LoginException {
 
-		Member member = memberRepo.getByAdharNo(aadharNo);
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
-		if (member != null) {
+		CurrentUserSession currentSessionUser = userRepo.findByuuid(key);
 
-			return member;
+		if (currentSessionAdmin != null || currentSessionUser != null) {
 
-		} else {
+			Member member = memberRepo.getByAdharNo(aadharNo);
 
-			throw new MemberException("Member not found with Aadhar No : " + aadharNo);
+			if (member != null) {
 
-		}
+				return member;
+
+			} else {
+
+				throw new MemberException("Member not found with Aadhar No : " + aadharNo);
+
+			}
+		} else
+			throw new LoginException("Oops...! Log in as an admin/user first.");
 	}
 
 	@Override
-	public Member getMemberByPanNo(String panNo) throws MemberException {
+	public Member getMemberByPanNo(String panNo, String key) throws MemberException, LoginException {
 
-		Member member = memberRepo.getByPanNo(panNo);
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
-		if (member != null) {
+		CurrentUserSession currentSessionUser = userRepo.findByuuid(key);
 
-			return member;
+		if (currentSessionAdmin != null || currentSessionUser != null) {
 
-		} else {
+			Member member = memberRepo.getByPanNo(panNo);
 
-			throw new MemberException("Member not found with Aadhar No : " + panNo);
+			if (member != null) {
 
-		}
+				return member;
+
+			} else {
+
+				throw new MemberException("Member not found with Aadhar No : " + panNo);
+
+			}
+
+		} else
+			throw new LoginException("Oops...! Log in as an admin/user first.");
 	}
 
 	@Override
-	public Member addMember(Member member) throws MemberException {
+	public Member addMember(Member member, String key) throws MemberException, LoginException {
 
-		Member registeredMember = memberRepo.save(member);
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
-		if (registeredMember != null) {
+		CurrentUserSession currentSessionUser = userRepo.findByuuid(key);
 
-			return member;
+		if (currentSessionAdmin != null || currentSessionUser != null) {
 
-		} else {
+			Member registeredMember = memberRepo.save(member);
 
-			throw new MemberException("Something went wrong.");
+			if (registeredMember != null) {
 
-		}
+				return member;
+
+			} else {
+
+				throw new MemberException("Something went wrong.");
+
+			}
+		} else
+			throw new LoginException("Oops...! Log in as an admin/user first.");
 	}
 
 	@Override
-	public Member updateMember(Member member) throws MemberException {
+	public Member updateMember(Member member, String key) throws MemberException, LoginException {
 
-		Optional<Member> optional = memberRepo.findById(member.getMemberId());
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
-		if (optional.isPresent()) {
+		CurrentUserSession currentSessionUser = userRepo.findByuuid(key);
 
-			Member oldMember = optional.get();
+		if (currentSessionAdmin != null || currentSessionUser != null) {
 
-			oldMember.setDose1date(member.getDose1date());
-			oldMember.setDose1status(member.getDose1status());
-			oldMember.setDose2date(member.getDose2date());
-			oldMember.setDose2status(member.getDose2status());
+			Optional<Member> optional = memberRepo.findById(member.getMemberId());
 
-			return memberRepo.save(oldMember);
+			if (optional.isPresent()) {
 
-		} else {
+				Member oldMember = optional.get();
 
-			throw new MemberException("No any member found with memberId : " + member.getMemberId());
+				oldMember.setDose1date(member.getDose1date());
+				oldMember.setDose1status(member.getDose1status());
+				oldMember.setDose2date(member.getDose2date());
+				oldMember.setDose2status(member.getDose2status());
 
-		}
+				return memberRepo.save(oldMember);
+
+			} else {
+
+				throw new MemberException("No any member found with memberId : " + member.getMemberId());
+
+			}
+		} else
+			throw new LoginException("Oops...! Log in as an admin/user first.");
 	}
 
 	@Override
-	public Boolean deleteMember(Member member) throws MemberException {
+	public Boolean deleteMember(Member member, String key) throws MemberException, LoginException {
 
-		Optional<Member> optional = memberRepo.findById(member.getMemberId());
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
-		if (optional.isPresent()) {
+		CurrentUserSession currentSessionUser = userRepo.findByuuid(key);
 
-			Member currentMember = optional.get();
+		if (currentSessionAdmin != null || currentSessionUser != null) {
 
-			if (currentMember.getDose1status() == true) {
+			Optional<Member> optional = memberRepo.findById(member.getMemberId());
 
-				if (currentMember.getDose2status() == true) {
+			if (optional.isPresent()) {
 
-					memberRepo.delete(currentMember);
+				Member currentMember = optional.get();
 
-					return true;
+				if (currentMember.getDose1status() == true) {
+
+					if (currentMember.getDose2status() == true) {
+
+						memberRepo.delete(currentMember);
+
+						return true;
+
+					} else {
+						throw new MemberException("Member must have to complete dose 2.");
+					}
 
 				} else {
-					throw new MemberException("Member must have to complete dose 2.");
+					throw new MemberException("Member must have to complete dose 1 & dose 2.");
 				}
 
 			} else {
-				throw new MemberException("Member must have to complete dose 1 & dose 2.");
+				throw new MemberException("No any member found with memberId : " + member.getMemberId());
 			}
-
-		} else {
-			throw new MemberException("No any member found with memberId : " + member.getMemberId());
-		}
+		} else
+			throw new LoginException("Oops...! Log in as an admin/user first.");
 	}
 
 }
