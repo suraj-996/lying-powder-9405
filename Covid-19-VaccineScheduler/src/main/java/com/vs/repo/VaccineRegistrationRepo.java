@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.vs.model.VaccineRegistration;
 
 @Repository
-public interface VaccineRegistrationRepo extends JpaRepository<VaccineRegistration, Integer>{
-	
-	public List<VaccineRegistration> findByMobileno(Long mobileno);
+public interface VaccineRegistrationRepo extends JpaRepository<VaccineRegistration, Integer> {
+
+	public VaccineRegistration findByMobileno(Long mobileno, String key);
 
 }

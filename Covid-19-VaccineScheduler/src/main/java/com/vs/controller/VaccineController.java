@@ -20,43 +20,43 @@ import com.vs.service.VaccineService;
 
 //@RestController
 public class VaccineController {
-	@Autowired
-	private VaccineService vaccineService;
-	
-	@GetMapping("/vaccines")
-	public ResponseEntity<List<Vaccine>> allVaccineController() throws VaccineException{
-		List<Vaccine> vaccines= vaccineService.allVaccines();
-		return new ResponseEntity<List<Vaccine>>(vaccines,HttpStatus.OK);
-	}
-	
-	@GetMapping("/vaccine")
-	public ResponseEntity<List<Vaccine>> getVaccineByNameController(@RequestParam("vaccineName") String vaccineName) throws VaccineException{
-		List<Vaccine> vaccines=vaccineService.getVaccineByName(vaccineName);
-		return new ResponseEntity<List<Vaccine>>(vaccines,HttpStatus.OK);
-	}
-	
-	@GetMapping("/vaccine/{vaccineId}")
-	public ResponseEntity<Vaccine> getVaccineByIdController(@PathVariable("vaccineId") Integer vaccineId) throws VaccineException{
-		Vaccine vaccine=vaccineService.getVaccineById(vaccineId);
-		return new ResponseEntity<Vaccine>(vaccine,HttpStatus.OK);
-	}
-	
-	@PostMapping("/vaccines")
-	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine) throws VaccineException{
-		Vaccine vacc=vaccineService.addVaccine(vaccine);
-		return new ResponseEntity<Vaccine>(vacc,HttpStatus.CREATED);
-	}
-	
-	@PutMapping("/vaccines")
-	public ResponseEntity<Vaccine> updateVaccineController(@RequestBody Vaccine vaccine) throws VaccineException{
-		Vaccine vacc=vaccineService.updateVaccine(vaccine);
-		return new ResponseEntity<Vaccine>(vacc,HttpStatus.OK);
-	}
-	
-	@DeleteMapping("/vaccines/{vaccineId}")
-	public ResponseEntity<Boolean> deleteVaccineController(@PathVariable("vaccineId") Integer vaccineId) throws VaccineException{
-		Boolean ans=vaccineService.deleteVaccine(vaccineId);
-		return new ResponseEntity<Boolean>(ans,HttpStatus.OK);
-	}
+//	@Autowired
+//	private VaccineService vaccineService;
+//	
+//	@GetMapping("/vaccines")
+//	public ResponseEntity<List<Vaccine>> allVaccineController() throws VaccineException{
+//		List<Vaccine> vaccines= vaccineService.allVaccines();
+//		return new ResponseEntity<List<Vaccine>>(vaccines,HttpStatus.OK);
+//	}
+//	
+//	@GetMapping("/vaccine")
+//	public ResponseEntity<List<Vaccine>> getVaccineByNameController(@RequestParam("vaccineName") String vaccineName) throws VaccineException{
+//		List<Vaccine> vaccines=vaccineService.getVaccineByName(vaccineName);
+//		return new ResponseEntity<List<Vaccine>>(vaccines,HttpStatus.OK);
+//	}
+//	
+//	@GetMapping("/vaccine/{vaccineId}")
+//	public ResponseEntity<Vaccine> getVaccineByIdController(@PathVariable("vaccineId") Integer vaccineId) throws VaccineException{
+//		Vaccine vaccine=vaccineService.getVaccineById(vaccineId);
+//		return new ResponseEntity<Vaccine>(vaccine,HttpStatus.OK);
+//	}
+//	
+//	@PostMapping("/vaccines")
+//	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine) throws VaccineException{
+//		Vaccine vacc=vaccineService.addVaccine(vaccine);
+//		return new ResponseEntity<Vaccine>(vacc,HttpStatus.CREATED);
+//	}
+//	
+//	@PutMapping("/vaccines")
+//	public ResponseEntity<Vaccine> updateVaccineController(@RequestBody Vaccine vaccine) throws VaccineException{
+//		Vaccine vacc=vaccineService.updateVaccine(vaccine);
+//		return new ResponseEntity<Vaccine>(vacc,HttpStatus.OK);
+//	}
+//	
+//	@DeleteMapping("/vaccines/{vaccineId}")
+//	public ResponseEntity<Boolean> deleteVaccineController(@PathVariable("vaccineId") Integer vaccineId) throws VaccineException{
+//		Boolean ans=vaccineService.deleteVaccine(vaccineId);
+//		return new ResponseEntity<Boolean>(ans,HttpStatus.OK);
+//	}
 	
 }

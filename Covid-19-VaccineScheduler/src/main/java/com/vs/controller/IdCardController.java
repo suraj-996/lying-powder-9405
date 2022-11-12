@@ -17,22 +17,22 @@ import com.vs.service.IdCardService;
 
 //@RestController
 public class IdCardController {
-	@Autowired
-	private IdCardService idCardService;
-	
-	@GetMapping("/panNo")
-	public ResponseEntity<Idcard> getPanCardByNumberController(@RequestParam("panNo") String panNo) throws IdCardException{
-		Idcard idcard= idCardService.getPanCardByNumber(panNo);
-		return new ResponseEntity<Idcard>(idcard,HttpStatus.OK);
-	}
-	@GetMapping("/adharNo")
-	public ResponseEntity<Idcard> getAdharCardByNoController(@RequestParam("adharNo") Long adharNo) throws IdCardException{
-		Idcard idcard= idCardService.getAdharCardByNo(adharNo);
-		return new ResponseEntity<Idcard>(idcard,HttpStatus.OK);
-	}
-	@PostMapping("/idcard")
-	public ResponseEntity<Idcard> addIdCardController(@RequestBody Idcard idCard) throws IdCardException{
-		Idcard idcard= idCardService.addIdCard(idCard);
-		return new ResponseEntity<Idcard>(idcard,HttpStatus.CREATED);
-	}
+//	@Autowired
+//	private IdCardService idCardService;
+//	
+//	@GetMapping("/panNo")
+//	public ResponseEntity<Idcard> getPanCardByNumberController(@RequestParam("panNo") String panNo) throws IdCardException{
+//		Idcard idcard= idCardService.getPanCardByNumber(panNo);
+//		return new ResponseEntity<Idcard>(idcard,HttpStatus.OK);
+//	}
+//	@GetMapping("/adharNo")
+//	public ResponseEntity<Idcard> getAdharCardByNoController(@RequestParam("adharNo") Long adharNo) throws IdCardException{
+//		Idcard idcard= idCardService.getAdharCardByNo(adharNo);
+//		return new ResponseEntity<Idcard>(idcard,HttpStatus.OK);
+//	}
+//	@PostMapping("/idcard")
+//	public ResponseEntity<Idcard> addIdCardController(@RequestBody Idcard idCard) throws IdCardException{
+//		Idcard idcard= idCardService.addIdCard(idCard);
+//		return new ResponseEntity<Idcard>(idcard,HttpStatus.CREATED);
+//	}
 }

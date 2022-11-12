@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vs.exception.AppointmentException;
+import com.vs.exception.UserException;
 import com.vs.model.Appointment;
+import com.vs.model.CurrentUserSession;
 import com.vs.repo.AppointmentRepo;
+import com.vs.repo.UserSessionRepo;
 import com.vs.service.AppointmentService;
 
 @Service
@@ -16,6 +19,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Autowired
 	public AppointmentRepo appointmentRepo;
+
+	@Autowired
+	private UserSessionRepo userSessionRepo;
 
 	@Override
 	public List<Appointment> getAllAppoinments() throws AppointmentException {
@@ -30,45 +36,70 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Appointment getAppoinment(Long bookingId) throws AppointmentException {
+	public Appointment getAppoinment(Long bookingId, String key) throws AppointmentException, UserException {
 
-		return appointmentRepo.findById(bookingId)
-				.orElseThrow(() -> new AppointmentException("Appointment not found by booking id :" + bookingId));
+		CurrentUserSession currentUser = userSessionRepo.findByuuid(key);
+
+		if (currentUser != null) {
+
+			return appointmentRepo.findById(bookingId)
+					.orElseThrow(() -> new AppointmentException("Appointment not found by booking id :" + bookingId));
+		} else
+			throw new UserException("Opps...!!! Login as a user first.");
 	}
 
 	@Override
-	public Appointment addAppoinment(Appointment app) throws AppointmentException {
-		Appointment appointment = appointmentRepo.save(app);
-		if (appointment != null) {
-			return appointment;
-		} else {
-			throw new AppointmentException("Appointment not Scheduled! Please try after some time!");
-		}
+	public Appointment addAppoinment(Appointment app, String key) throws AppointmentException, UserException {
+
+		CurrentUserSession currentUser = userSessionRepo.findByuuid(key);
+
+		if (currentUser != null) {
+			Appointment appointment = appointmentRepo.save(app);
+			if (appointment != null) {
+				return appointment;
+			} else {
+				throw new AppointmentException("Appointment not Scheduled! Please try after some time!");
+			}
+		} else
+			throw new UserException("Opps...!!! Login as a user first.");
 	}
 
 	@Override
-	public Appointment updateAppoinment(Appointment app) throws AppointmentException {
-		Optional<Appointment> appointment = appointmentRepo.findById(app.getBookingid());
+	public Appointment updateAppoinment(Appointment app, String key) throws AppointmentException, UserException {
 
-		if (appointment.isPresent()) {
+		CurrentUserSession currentUser = userSessionRepo.findByuuid(key);
 
-			appointmentRepo.save(app);
+		if (currentUser != null) {
 
-			return appointment.get();
-		} else {
-			throw new AppointmentException("No Appointment found!");
-		}
+			Optional<Appointment> appointment = appointmentRepo.findById(app.getBookingid());
+
+			if (appointment.isPresent()) {
+
+				appointmentRepo.save(app);
+
+				return appointment.get();
+			} else {
+				throw new AppointmentException("No Appointment found!");
+			}
+		} else
+			throw new UserException("Opps...!!! Login as a user first.");
 	}
 
 	@Override
-	public boolean deleteAppoinment(Appointment app) throws AppointmentException {
+	public boolean deleteAppoinment(Appointment app, String key) throws AppointmentException, UserException {
 
-		Appointment appointment = appointmentRepo.findById(app.getBookingid())
-				.orElseThrow(() -> new AppointmentException("Appointment not found!"));
+		CurrentUserSession currentUser = userSessionRepo.findByuuid(key);
 
-		appointmentRepo.delete(appointment);
+		if (currentUser != null) {
+			Appointment appointment = appointmentRepo.findById(app.getBookingid())
+					.orElseThrow(() -> new AppointmentException("Appointment not found!"));
 
-		return true;
+			appointmentRepo.delete(appointment);
+
+			return true;
+
+		} else
+			throw new UserException("Opps...!!! Login as a user first.");
 	}
 
 }

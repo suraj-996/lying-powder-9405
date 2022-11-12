@@ -18,40 +18,34 @@ import com.vs.service.LoginService;
 public class LoginController {
 	@Autowired
 	private LoginService customerLogin;
-	
+
 	@PostMapping("/loginuser")
 	public ResponseEntity<String> logInCustomer(@RequestBody UserLogin dto) throws LoginException {
-		
-		String result = customerLogin.logIntoAccount(dto);
-		
 
-		
-		return new ResponseEntity<String>(result,HttpStatus.OK );
-		
-		
+		String result = customerLogin.logIntoAccount(dto);
+
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+
 	}
-	
+
 	@DeleteMapping("/logoutuser")
 	public String logoutCustomer(@RequestParam(required = false) String key) throws LoginException {
 		return customerLogin.logOutFromAccount(key);
-		
+
 	}
-	
+
 	@PostMapping("/loginadmin")
 	public ResponseEntity<String> logInAdmin(@RequestBody AdminLogin dto) throws LoginException {
-		
-		String result = customerLogin.logIntoAdmin(dto);
-		
 
-		
-		return new ResponseEntity<String>(result,HttpStatus.OK );
-		
-		
+		String result = customerLogin.logIntoAdmin(dto);
+
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+
 	}
-	
+
 	@DeleteMapping("/logoutadmin")
 	public String logoutAdmin(@RequestParam(required = false) String key) throws LoginException {
 		return customerLogin.logOutAdmin(key);
-		
+
 	}
 }

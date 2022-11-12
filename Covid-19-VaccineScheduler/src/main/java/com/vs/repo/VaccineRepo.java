@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.vs.model.Vaccine;
 
 @Repository
-public interface VaccineRepo extends JpaRepository<Vaccine, Integer>{
+public interface VaccineRepo extends JpaRepository<Vaccine, Integer> {
+
 	@Query("select v from Vaccine v where v.vaccineName=?1")
-	public List<Vaccine> findVaccineByName(String vaccineName);
+	public List<Vaccine> findVaccineByName(String vaccineName, String key);
 }
