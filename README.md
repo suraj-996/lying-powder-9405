@@ -129,7 +129,7 @@
 
 ---
 
-<img src="https://github.com/shivamgarg796/Spring-work/blob/master/Images/Swagger-ui.jpeg?raw=true" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/suraj-996/lying-powder-9405/blob/main/images/all.png">
 
 ---
 
@@ -137,7 +137,7 @@
 
 ---
 
-<img src="https://github.com/shivamgarg796/Spring-work/blob/master/Images/Login.png?raw=true" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/suraj-996/lying-powder-9405/blob/main/images/login.png">
 
 ---
 
@@ -145,7 +145,7 @@
 
 ---
 
-<img src="https://github.com/shivamgarg796/Spring-work/blob/master/Images/Admin-Controller.jpeg?raw=true" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/suraj-996/lying-powder-9405/blob/main/images/admin.png">
 
 ---
 
@@ -153,19 +153,9 @@
 
 ---
 
-<img src="https://github.com/shivamgarg796/Spring-work/blob/master/Images/User.png?raw=true" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
+<img src="https://github.com/suraj-996/lying-powder-9405/blob/main/images/user.png">
 
 ---
 
-### Model Controller
 
----
-
-<img src="https://github.com/shivamgarg796/Spring-work/blob/master/Images/mODELS.png?raw=true" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
-
----
-
-<img src="https://github.com/shivamgarg796/Spring-work/blob/master/Images/Thank-you-word-cloud.jpg?raw=true" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
-
----
 
