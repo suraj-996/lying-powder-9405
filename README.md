@@ -111,31 +111,17 @@
 
 ### Sample API Response for Admin Login
 
-`POST   localhost:8080/login/adminlogin`
+`POST   localhost:8888/loginAdmin`
 
 * Request Body
 
 ```
     {
-        "mobileNo": "7056319981",
-        "password": "Clickme@007"
+        "mobileNo": "9525378279",
+        "password": "suraj@007"
     }
 ```
 
-* Response
-
-```
-   CurrentAdminSession(id=11, adminId=10, uuid=ZaVLaK, localDateTime=2022-08-17T11:13:42.772910500)
-   
-```
-
-## Video Explainer of flow control
- <a href="https://drive.google.com/file/d/1ReDNdgIxdSNcn7WsV2ysIHeXEnkgZErw/view?usp=sharing">**Video Drive Link** </a>
- 
- 
-### E-R Diagram Of Covid-19 Application
----
-<img src="https://github.com/shivamgarg796/Spring-work/blob/master/Images/Er-Diagram.jpeg?raw=true" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage">
 
 ---
 
