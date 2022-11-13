@@ -38,17 +38,16 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 	private VaccinationCenterRepo vcRepo;
 
 	@Override
-	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid, String key) throws VaccineException ,LoginException{
+	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid, String key)
+			throws VaccineException, LoginException {
 		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
 		if (currentSessionAdmin != null) {
 
-			Optional<VaccinationCenter> opt = vcRepo.findById(Centerid);
+			VaccinationCenter vc = vcRepo.getVaccineCenterById(Centerid);
 
-			if (opt.isPresent()) {
-
-				VaccinationCenter vc = opt.get();
-
+			if (vc != null) {
+				System.out.println(vc.getCode() + " " + vc.getVaccineInventory());
 				return vc.getVaccineInventory();
 			} else {
 				throw new VaccineException("Enter valid center id");
@@ -179,9 +178,10 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 	}
 
 	@Override
-	public VaccineInventory getVaccineInventoryByVaccine(Vaccine vc,String key) throws VaccineException,LoginException {
+	public VaccineInventory getVaccineInventoryByVaccine(Vaccine vc, String key)
+			throws VaccineException, LoginException {
 		// TODO Auto-generated method stub
-		
+
 		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
 		if (currentSessionAdmin != null) {
@@ -192,10 +192,26 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 			} else {
 				throw new VaccineException("Vaccine inventory not found vaccine id - " + vc.getVaccineId());
 			}
-		}else {
+		} else {
 			throw new LoginException("Oops...! Login as admin first.");
 		}
-		
+
+	}
+
+	@Override
+	public VaccineInventory addVaccineInventory(VaccineInventory vaccineInventory, String key)
+			throws VaccineException, LoginException {
+
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
+
+		if (currentSessionAdmin != null) {
+
+			return viRepo.save(vaccineInventory);
+
+		} else {
+			throw new LoginException("Oops...! Login as admin first.");
+		}
+
 	}
 
 }

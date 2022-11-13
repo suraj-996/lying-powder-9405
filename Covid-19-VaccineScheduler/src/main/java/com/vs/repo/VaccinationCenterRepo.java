@@ -12,4 +12,7 @@ public interface VaccinationCenterRepo extends JpaRepository<VaccinationCenter, 
 	@Query("select c from VaccinationCenter c where c.centername=?1")
 	public VaccinationCenter findVaccinationCenterByName(String centername, String key);
 
+	@Query("select c from VaccinationCenter c where c.code = ?1")
+	public VaccinationCenter getVaccineCenterById(Integer vcId);
+
 }

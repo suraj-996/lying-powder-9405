@@ -27,7 +27,6 @@ public class VaccinationCenter {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
 
-	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;
 

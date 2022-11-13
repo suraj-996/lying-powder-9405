@@ -8,10 +8,10 @@ import com.vs.exception.VaccineException;
 import com.vs.model.Vaccine;
 import com.vs.model.VaccineInventory;
 
-
 public interface VaccineInventoryService {
 
-	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid,String key)throws VaccineException, LoginException;
+	public VaccineInventory getVaccineInventoryByCenter(Integer Centerid, String key)
+			throws VaccineException, LoginException;
 
 	public VaccineInventory addVaccineCount(VaccineInventory vinv, Integer count, String key)
 			throws VaccineException, LoginException;
@@ -24,7 +24,9 @@ public interface VaccineInventoryService {
 	public List<VaccineInventory> getVaccineInventoryByDate(LocalDate ld, String key)
 			throws VaccineException, LoginException;
 
-	public VaccineInventory getVaccineInventoryByVaccine(Vaccine vc,String key)throws VaccineException, LoginException;
+	public VaccineInventory getVaccineInventoryByVaccine(Vaccine vc, String key)
+			throws VaccineException, LoginException;
 
-
+	public VaccineInventory addVaccineInventory(VaccineInventory vaccineInventory, String key)
+			throws VaccineException, LoginException;
 }
