@@ -15,24 +15,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class VaccineInventory {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer inventoryId;
 	private LocalDate date;
 	private String location;
-	
+
 	@Embedded
-	private VaccineCount vaccineCount; 
-	
+	private VaccineCount vaccineCount;
 
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
 	private List<VaccinationCenter> vaccinationCenters;
-	
-	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
 	private List<Vaccine> vaccines;
+
 	public VaccineInventory() {
 		// TODO Auto-generated constructor stub
 	}
@@ -45,10 +44,6 @@ public class VaccineInventory {
 		this.vaccineCount = vaccineCount;
 		this.vaccinationCenters = vaccinationCenters;
 	}
-
-	
-	
-	
 
 	public Integer getInventoryId() {
 		return inventoryId;
@@ -89,18 +84,5 @@ public class VaccineInventory {
 	public void setVaccinationCenters(List<VaccinationCenter> vaccinationCenters) {
 		this.vaccinationCenters = vaccinationCenters;
 	}
-	
-	
-	
 
-	
-
-
-
-
-
-
-
-
-	
 }

@@ -3,6 +3,8 @@ package com.vs.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -304,6 +306,16 @@ public class AdminController {
 	}
 
 	// vaccine inventory
+
+	@PostMapping("addVaccineInventory")
+	public ResponseEntity<VaccineInventory> addVaccineInventory(@RequestBody VaccineInventory vaccineInventory,
+			@RequestParam(value = "key", required = false) String key) throws VaccineException, LoginException {
+
+		VaccineInventory addedVCInventory = vaccInvSer.addVaccineInventory(vaccineInventory, key);
+		
+		return new ResponseEntity<VaccineInventory>(addedVCInventory, HttpStatus.OK);
+		
+	}
 
 	@GetMapping("/getInvByCenter/{centerid}")
 	public ResponseEntity<VaccineInventory> getVaccineInventoryByCenter(@PathVariable("centerid") Integer centerid,
