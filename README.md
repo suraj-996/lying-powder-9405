@@ -42,11 +42,11 @@
 
 ## Contributors
 
-* [Gaurav Dhamal](https://github.com/gauravdhamal)
-* [Aman Yadav](https://github.com/aman6750)
-* [Trupti Rajendra Ghadekar](https://github.com/TruptiRG)
-* [Amit Singh](https://github.com/amitsinghthapliyal)
-* [Suraj Kumar](https://github.com/suraj-996)
+* [@Gaurav Dhamal](https://github.com/gauravdhamal)
+* [@Aman Yadav](https://github.com/aman6750)
+* [@Trupti Rajendra Ghadekar](https://github.com/TruptiRG)
+* [@Amit Singh](https://github.com/amitsinghthapliyal)
+* [@Suraj Kumar](https://github.com/suraj-996)
 
 
 
@@ -111,7 +111,7 @@
 
 ### Sample API Response for Admin Login
 
-`POST   localhost:8888/loginAdmin`
+`POST   localhost:8888/adminlogin`
 
 * Request Body
 
