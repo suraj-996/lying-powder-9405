@@ -314,7 +314,7 @@ public class AdminController {
 		return new ResponseEntity<VaccineInventory>(vaccineinventory, HttpStatus.OK);
 	}
 
-	@PutMapping("/addVaccCount/{count}")
+	@PutMapping("/addVaccCountInv/{count}")
 	public ResponseEntity<VaccineInventory> addVaccineCount(@RequestBody VaccineInventory vinv,
 			@PathVariable("count") Integer count, @RequestParam(value = "key", required = false) String key)
 			throws VaccineException, LoginException {
@@ -325,7 +325,7 @@ public class AdminController {
 
 	}
 
-	@PutMapping("/updateVaccinv/vinv")
+	@PutMapping("/updateVaccInv/vinv")
 	public ResponseEntity<VaccineInventory> updateVaccineInventory(@RequestBody VaccineInventory vinv,
 			@RequestParam(value = "key", required = false) String key) throws VaccineException, LoginException {
 
@@ -335,7 +335,7 @@ public class AdminController {
 
 	}
 
-	@DeleteMapping("/deleteinv")
+	@DeleteMapping("/deleteInv")
 	public boolean deleteVaccineInventory(@RequestBody VaccineInventory vinv,
 			@RequestParam(value = "key", required = false) String key) throws VaccineException, LoginException {
 
