@@ -1,4 +1,10 @@
 # Covid-19 Vaccine Scheduler
+<p align="center">
+  <img style="width:25%;" src="https://github.com/suraj-996/lying-powder-9405/blob/main/images/b%20(2).png" />
+</p>
+
+
+<li>Covid 19 REST Full web API, created using Java Spring Boot, JPA-Hibernate with MySQL database.
 ![Logo](https://github.com/suraj-996/lying-powder-9405/blob/main/images/b%20(2).png)
 ## ER-Diagram
 ![ER Diagram](https://user-images.githubusercontent.com/86916671/201477506-29a8c28e-f0af-4c45-954a-960304d985ea.jpeg)
