@@ -4,7 +4,6 @@
 </p>
 
 
-<li>Covid 19 REST Full web API, created using Java Spring Boot, JPA-Hibernate with MySQL database.
 
 ## ER-Diagram
 ![ER Diagram](https://user-images.githubusercontent.com/86916671/201477506-29a8c28e-f0af-4c45-954a-960304d985ea.jpeg)
@@ -12,7 +11,7 @@
 ## Work-Flow
 ![Work Flow_1](https://user-images.githubusercontent.com/86916671/201476556-5029e501-ee5c-4159-b8de-fe64e7dc770c.png)
 
-# REST API for an Covid-19 Application
+# REST API for Covid-19 Application
 
 * We have developed this REST API for an Covid-19 Application. This API performs all the fundamental CRUD operations of any Covid-19 Application platform with user validation at every step.
 * This project is developed by team of 5 Back-end Developers during project week in Masai School. 
