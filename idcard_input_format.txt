@@ -40,4 +40,15 @@ member
 
 User - Appointment, Member, Vaccine, Vaccine Center,Vaccine Registration
 
-Admin - Member, Vaccine, Vaccine Center,Vaccine Registration,Vaccine Inventory,Appointment,
+Admin - Member, Vaccine, Vaccine Center,Vaccine Registration,Vaccine Inventory,
+
+admin - vaccine inventory,vaccine Center
+user - member,vaccine,appointment,vaccine Registration
+
+
+
+aman-vaccine inventory,vaccine center
+trupti - vaccine Registration,vaccine
+amit-member ,appointment
+gaurav -
+suraj -
