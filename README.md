@@ -33,11 +33,10 @@
 * Admin Features:
     * Administrator Role of the entire application
     * Only registered admins with valid session token can add/update/delete driver or customer from main database
-    * Admin can access the details of different Appointment, Member ,Vaccine Center ,Vaccine Inventory and Vaccine Ragistration.
+    * Admin can access the details of different Member ,Vaccine Center ,Vaccine Inventory and Vaccine Ragistration.
 * User Features:
     * A user can register himself or herself on the platform.
     * He/She can check the vaccine centres and vaccine availabilty.
-    * If vaccine is available, can book an appointment slot.
     * After booking an appointment, he will get appointment details for the vaccine dose.    
 
 
@@ -96,18 +95,6 @@
 * `DELETE /customer/complete/{tripid}` : Completed the trip with the given tripid 
 * `DELETE /customer/canceltrip` : Cancel the trip with the given tripid   
 
-
-### Admin Module
-
-* `POST /admin/register` : Register a new admin with proper data validation and admin session
-* `POST /admin/login` : Admin can login with mobile number and password provided at the time of registation
-* `GET /admin/logout` : Logging out admin based on session token
-* `GET /admin/listoftripsbycustomer` : Get list of trips of by a customer id
-* `GET /admin/listoftrips` : Get list of trips of all the trips
-* `GET /admin/listocustomers` : Get list of all the customers
-* `GET /admin/listodrivers` : Get list of all the drivers
-* `PUT /admin/update/{username}` : Updates admin detaisl by passed user name
-* `DELETE /admin/delete` : Deletes the admin with passed id   -->
 
 
 ### Sample API Response for Admin Login
