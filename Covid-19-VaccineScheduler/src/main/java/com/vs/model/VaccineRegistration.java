@@ -16,7 +16,7 @@ public class VaccineRegistration {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer registrationNo;
-	private Long mobileno;
+	private String mobileno;
 	private LocalDate dateofregistration;
 	
 	@JsonIgnore
@@ -26,7 +26,7 @@ public class VaccineRegistration {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public VaccineRegistration(long mobileno, LocalDate dateofregistration) {
+	public VaccineRegistration(String mobileno, LocalDate dateofregistration) {
 		super();
 		this.mobileno = mobileno;
 		this.dateofregistration = dateofregistration;
@@ -40,11 +40,11 @@ public class VaccineRegistration {
 		this.registrationNo = registrationNo;
 	}
 
-	public Long getMobileno() {
+	public String getMobileno() {
 		return mobileno;
 	}
 
-	public void setMobileno(Long mobileno) {
+	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
 	}
 
