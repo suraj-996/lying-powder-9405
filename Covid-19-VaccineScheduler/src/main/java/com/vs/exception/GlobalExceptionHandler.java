@@ -76,7 +76,7 @@ public class GlobalExceptionHandler {
 		err.setTime(LocalDateTime.now());
 		err.setMessage(me.getMessage());
 		err.setDescription(re.getDescription(false));
-		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(AppointmentException.class)
@@ -94,7 +94,7 @@ public class GlobalExceptionHandler {
 		err.setTime(LocalDateTime.now());
 		err.setMessage(me.getMessage());
 		err.setDescription(re.getDescription(false));
-		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(UserException.class)
