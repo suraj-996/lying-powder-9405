@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class VaccinationCenter {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer code;
@@ -31,9 +31,9 @@ public class VaccinationCenter {
 	private VaccineInventory vaccineInventory;
 
 	public List<Appointment> getAppointments() {
-		
+
 		return appointments;
-		
+
 	}
 
 	public void setAppointments(List<Appointment> appointments) {
@@ -90,9 +90,9 @@ public class VaccinationCenter {
 	}
 
 	public void setState(String state) {
-		
+
 		this.state = state;
-		
+
 	}
 
 	public String getPincode() {

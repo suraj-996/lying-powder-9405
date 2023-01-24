@@ -14,10 +14,13 @@ public interface VaccineService {
 
 	public Vaccine getVaccineById(Integer vaccineId, String key) throws VaccineException, LoginException;
 
-	public Vaccine addVaccine(Vaccine vaccine, String key) throws VaccineException, LoginException;
+	public Vaccine addVaccine(Vaccine vaccine, Integer vaccineInventoryId, String key)
+			throws VaccineException, LoginException;
 
 	public Vaccine updateVaccine(Vaccine vaccine, String key) throws VaccineException, LoginException;
 
 	public Boolean deleteVaccine(Integer vaccineId, String key) throws VaccineException, LoginException;
+
+	public String bookVaccine(Integer vaccineId, String key) throws VaccineException, LoginException;
 
 }

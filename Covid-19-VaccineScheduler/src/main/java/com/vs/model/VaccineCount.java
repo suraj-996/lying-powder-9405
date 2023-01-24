@@ -1,10 +1,7 @@
 package com.vs.model;
 
-import javax.persistence.Entity;
-
-
 public class VaccineCount {
-	
+
 	private Integer quantity;
 	private Double price;
 

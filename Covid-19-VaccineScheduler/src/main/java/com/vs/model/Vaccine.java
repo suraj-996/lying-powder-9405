@@ -1,7 +1,6 @@
 package com.vs.model;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,37 +11,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Vaccine {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	private Integer vaccineId;
-	
 	private String vaccineName;
 	private String description;
-
-	@Embedded
-	private VaccineCount vaccineCount;
 
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Member member;
 
-	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;
+
 	public Vaccine() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Vaccine(Integer vaccineId, String vaccineName, String description, VaccineCount vaccineCount,
-			Member member) {
+	public Vaccine(Integer vaccineId, String vaccineName, String description, Member member) {
 		super();
 		this.vaccineId = vaccineId;
 		this.vaccineName = vaccineName;
 		this.description = description;
-		this.vaccineCount = vaccineCount;
 		this.member = member;
 	}
 
@@ -70,20 +61,26 @@ public class Vaccine {
 		this.description = description;
 	}
 
-	public VaccineCount getVaccineCount() {
-		return vaccineCount;
-	}
-
-	public void setVaccineCount(VaccineCount vaccineCount) {
-		this.vaccineCount = vaccineCount;
-	}
-
 	public Member getMember() {
 		return member;
 	}
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public VaccineInventory getVaccineInventory() {
+		return vaccineInventory;
+	}
+
+	public void setVaccineInventory(VaccineInventory vaccineInventory) {
+		this.vaccineInventory = vaccineInventory;
+	}
+
+	@Override
+	public String toString() {
+		return "Vaccine [vaccineId=" + vaccineId + ", vaccineName=" + vaccineName + ", description=" + description
+				+ ", member=" + member + ", vaccineInventory=" + vaccineInventory + "]";
 	}
 
 }

@@ -1,12 +1,9 @@
 package com.vs.model;
 
-import javax.persistence.Entity;
-
-
 public class AdminLogin {
 	private String mobileNo;
 	private String password;
-	
+
 	public AdminLogin() {
 		// TODO Auto-generated constructor stub
 	}

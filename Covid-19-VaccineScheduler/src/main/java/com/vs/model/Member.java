@@ -1,18 +1,13 @@
 package com.vs.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.ManyToAny;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,7 +16,6 @@ public class Member {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	private Integer memberId;
 	private Boolean dose1status;
 	private Boolean dose2status;
@@ -31,7 +25,7 @@ public class Member {
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private VaccineRegistration vaccineRegistration;
-	
+
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Appointment appointment;
@@ -40,7 +34,6 @@ public class Member {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Vaccine vaccine;
 
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Idcard idcard;
 
@@ -49,8 +42,7 @@ public class Member {
 	}
 
 	public Member(Boolean dose1status, Boolean dose2status, LocalDate dose1date, LocalDate dose2date,
-			VaccineRegistration vaccineRegistration, Appointment appointment, Vaccine vaccine,
-			Idcard idcard) {
+			VaccineRegistration vaccineRegistration, Appointment appointment, Vaccine vaccine, Idcard idcard) {
 		super();
 		this.dose1status = dose1status;
 		this.dose2status = dose2status;

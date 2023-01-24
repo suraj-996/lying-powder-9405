@@ -223,10 +223,10 @@ public class UserController {
 	}
 
 	@PostMapping("/vaccines")
-	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine,
+	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine, Integer vaccineInventoryId,
 			@RequestParam(required = false) String key) throws VaccineException, LoginException {
 
-		Vaccine vacc = vaccineService.addVaccine(vaccine, key);
+		Vaccine vacc = vaccineService.addVaccine(vaccine, vaccineInventoryId, key);
 
 		return new ResponseEntity<Vaccine>(vacc, HttpStatus.CREATED);
 	}

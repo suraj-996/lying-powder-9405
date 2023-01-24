@@ -8,8 +8,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class User {
 	@Id
@@ -18,13 +16,13 @@ public class User {
 	private Integer userId;
 	@NotNull(message = "Name is mandatory")
 	private String name;
-	@Size(max = 10,min = 10)
+	@Size(max = 10, min = 10)
 	private String mobileNo;
 	@NotNull(message = "Password is mandatory")
 	private String password;
 	@Email
 	private String email;
-	
+
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
@@ -77,6 +75,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
 }

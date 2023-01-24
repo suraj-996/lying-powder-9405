@@ -11,9 +11,11 @@ import com.vs.exception.VaccineCenterException;
 import com.vs.model.CurrentAdminSession;
 import com.vs.model.CurrentUserSession;
 import com.vs.model.VaccinationCenter;
+import com.vs.model.VaccineInventory;
 import com.vs.repo.AdminSessionRepo;
 import com.vs.repo.UserSessionRepo;
 import com.vs.repo.VaccinationCenterRepo;
+import com.vs.repo.VaccineInventoryRepo;
 import com.vs.service.VaccinationCenterService;
 
 @Service
@@ -27,6 +29,9 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService {
 
 	@Autowired
 	private UserSessionRepo userRepo;
+
+	@Autowired
+	private VaccineInventoryRepo vaccineInventoryRepo;
 
 	@Override
 	public List<VaccinationCenter> getAllVaccineCenters() throws VaccineCenterException {
@@ -68,7 +73,7 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService {
 	}
 
 	@Override
-	public VaccinationCenter addVaccinationCenter(VaccinationCenter center, String key)
+	public VaccinationCenter addVaccinationCenter(VaccinationCenter center, Integer vaccineInventoryId, String key)
 			throws VaccineCenterException, LoginException {
 
 		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
@@ -82,8 +87,16 @@ public class VaccinationCenterServiceImpl implements VaccinationCenterService {
 			if (opt.isPresent()) {
 
 				throw new VaccineCenterException("sorry this Vaccination center already exist");
-			} else
-				return vacenRepo.save(center);
+			} else {
+				Optional<VaccineInventory> optionalVaccineInventory = vaccineInventoryRepo.findById(vaccineInventoryId);
+				if (optionalVaccineInventory.isPresent()) {
+					VaccineInventory vaccineInventory = optionalVaccineInventory.get();
+					center.setVaccineInventory(vaccineInventory);
+					return vacenRepo.save(center);
+				} else {
+					throw new VaccineCenterException("Inventory not found with ID " + vaccineInventoryId);
+				}
+			}
 		} else
 			throw new LoginException("Oops...! Login as a user/Admin first.");
 

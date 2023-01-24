@@ -174,10 +174,10 @@ public class AdminController {
 	}
 
 	@PostMapping("/vaccines")
-	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine,
+	public ResponseEntity<Vaccine> addVaccineController(@RequestBody Vaccine vaccine, Integer vaccineInventoryId,
 			@RequestParam(required = false) String key) throws VaccineException, LoginException {
 
-		Vaccine vacc = vaccineService.addVaccine(vaccine, key);
+		Vaccine vacc = vaccineService.addVaccine(vaccine, vaccineInventoryId, key);
 
 		return new ResponseEntity<Vaccine>(vacc, HttpStatus.CREATED);
 	}
@@ -230,10 +230,10 @@ public class AdminController {
 	}
 
 	@PostMapping("/addVaccCenter")
-	public VaccinationCenter addVaccinationCenter(@RequestBody VaccinationCenter center,
+	public VaccinationCenter addVaccinationCenter(@RequestBody VaccinationCenter center, Integer vaccineInventoryId,
 			@RequestParam(value = "key", required = false) String key) throws VaccineCenterException, LoginException {
 
-		VaccinationCenter vc = vaccenser.addVaccinationCenter(center, key);
+		VaccinationCenter vc = vaccenser.addVaccinationCenter(center, vaccineInventoryId, key);
 
 		if (vc != null) {
 			return vc;

@@ -13,7 +13,7 @@ public interface VaccinationCenterService {
 	public VaccinationCenter getVaccineCenter(Integer centerId, String key)
 			throws VaccineCenterException, LoginException;
 
-	public VaccinationCenter addVaccinationCenter(VaccinationCenter center, String key)
+	public VaccinationCenter addVaccinationCenter(VaccinationCenter center, Integer vaccineInventoryId, String key)
 			throws VaccineCenterException, LoginException;
 
 	public VaccinationCenter updateVaccinationCenter(VaccinationCenter center, String key)
