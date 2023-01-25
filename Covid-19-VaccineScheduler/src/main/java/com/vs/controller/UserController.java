@@ -328,10 +328,10 @@ public class UserController {
 	}
 
 	@PostMapping("/appointments")
-	public ResponseEntity<Appointment> addAppoinment(@RequestBody Appointment app,
+	public ResponseEntity<Appointment> addAppoinment(@RequestBody Appointment app, Integer vaccinationCenterId,
 			@RequestParam(value = "key", required = false) String key) throws AppointmentException, UserException {
 
-		Appointment appointment = appointmentService.addAppoinment(app, key);
+		Appointment appointment = appointmentService.addAppoinment(app, vaccinationCenterId, key);
 
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
 	}

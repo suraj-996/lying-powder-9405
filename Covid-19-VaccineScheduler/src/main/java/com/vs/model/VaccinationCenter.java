@@ -1,5 +1,6 @@
 package com.vs.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,7 +26,7 @@ public class VaccinationCenter {
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Appointment> appointments;
+	private List<Appointment> appointments = new ArrayList<>();
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;

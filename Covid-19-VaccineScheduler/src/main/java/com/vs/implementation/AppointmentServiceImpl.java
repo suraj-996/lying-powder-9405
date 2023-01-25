@@ -10,8 +10,10 @@ import com.vs.exception.AppointmentException;
 import com.vs.exception.UserException;
 import com.vs.model.Appointment;
 import com.vs.model.CurrentUserSession;
+import com.vs.model.VaccinationCenter;
 import com.vs.repo.AppointmentRepo;
 import com.vs.repo.UserSessionRepo;
+import com.vs.repo.VaccinationCenterRepo;
 import com.vs.service.AppointmentService;
 
 @Service
@@ -22,6 +24,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Autowired
 	private UserSessionRepo userSessionRepo;
+
+	@Autowired
+	private VaccinationCenterRepo vaccinationCenterRepo;
 
 	@Override
 	public List<Appointment> getAllAppoinments() throws AppointmentException {
@@ -48,16 +53,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Appointment addAppoinment(Appointment app, String key) throws AppointmentException, UserException {
+	public Appointment addAppoinment(Appointment app, Integer vaccinationCenterId, String key)
+			throws AppointmentException, UserException {
 
 		CurrentUserSession currentUser = userSessionRepo.findByuuid(key);
 
 		if (currentUser != null) {
-			Appointment appointment = appointmentRepo.save(app);
-			if (appointment != null) {
-				return appointment;
+			Optional<VaccinationCenter> optVaccinationCenter = vaccinationCenterRepo.findById(vaccinationCenterId);
+			if (optVaccinationCenter.isPresent()) {
+				app.getVaccinationCenters().add(optVaccinationCenter.get());
+				return appointmentRepo.save(app);
 			} else {
-				throw new AppointmentException("Appointment not Scheduled! Please try after some time!");
+				throw new AppointmentException("VaccinationCenter not found enter correct ID.");
 			}
 		} else
 			throw new UserException("Opps...!!! Login as a user first.");

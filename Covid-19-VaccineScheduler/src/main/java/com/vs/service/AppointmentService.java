@@ -11,7 +11,8 @@ public interface AppointmentService {
 
 	public Appointment getAppoinment(Integer bookingId, String key) throws AppointmentException, UserException;
 
-	public Appointment addAppoinment(Appointment app, String key) throws AppointmentException, UserException;
+	public Appointment addAppoinment(Appointment app, Integer vaccinationCenterId, String key)
+			throws AppointmentException, UserException;
 
 	public Appointment updateAppoinment(Appointment app, String key) throws AppointmentException, UserException;
 

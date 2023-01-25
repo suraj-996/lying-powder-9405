@@ -1,6 +1,7 @@
 package com.vs.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vs.myenum.Slots;
 
 @Entity
@@ -23,21 +23,20 @@ public class Appointment {
 //	@NotBlank(message = "Mobile Number is Mandatory")
 //	@Size(max=10,message="Moblie Number length should be 10!")
 //	@Pattern(regexp = "^[6-9][0-9]{9}$",message="Mobile No is Invalid!")
-	private Long mobileno;
+	private Long mobileno; // Null
 
 //	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	private LocalDate dateofbooking;
+	private LocalDate dateofbooking; // null
 
 	private Slots slots;
 
-	private Boolean bookingstatus;
+	private Boolean bookingstatus; // false
 
-	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "appointments")
-	List<VaccinationCenter> vaccinationCenter;
+	List<VaccinationCenter> vaccinationCenter = new ArrayList<>();
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private Member member;
+	private Member member; // null
 
 	public Appointment() {
 

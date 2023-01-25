@@ -60,7 +60,6 @@ public class VaccineInventoryImpl implements VaccineInventoryService {
 	@Override
 	public VaccineInventory addVaccineCount(VaccineInventory vinv, Integer count, String key)
 			throws VaccineException, LoginException {
-		// TODO Auto-generated method stub
 
 		CurrentAdminSession currentSessionAdmin = adminRepo.findByuuid(key);
 
