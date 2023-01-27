@@ -7,7 +7,7 @@ import com.vs.model.Appointment;
 
 public interface AppointmentService {
 
-	public List<Appointment> getAllAppoinments() throws AppointmentException;
+	public List<Appointment> getAllAppoinmentsByVaccineCenterId(Integer vaccinationCenterId) throws AppointmentException;
 
 	public Appointment getAppoinment(Integer bookingId, String key) throws AppointmentException, UserException;
 

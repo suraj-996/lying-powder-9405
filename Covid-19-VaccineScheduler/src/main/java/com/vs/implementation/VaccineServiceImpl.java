@@ -11,11 +11,13 @@ import com.vs.exception.VaccineException;
 import com.vs.model.Admin;
 import com.vs.model.CurrentAdminSession;
 import com.vs.model.CurrentUserSession;
+import com.vs.model.Member;
 import com.vs.model.User;
 import com.vs.model.Vaccine;
 import com.vs.model.VaccineInventory;
 import com.vs.repo.AdminRepo;
 import com.vs.repo.AdminSessionRepo;
+import com.vs.repo.MemberRepo;
 import com.vs.repo.UserRepo;
 import com.vs.repo.UserSessionRepo;
 import com.vs.repo.VaccineInventoryRepo;
@@ -39,6 +41,9 @@ public class VaccineServiceImpl implements VaccineService {
 
 	@Autowired
 	private UserRepo userRepo;
+
+	@Autowired
+	private MemberRepo memberRepo;
 
 	@Autowired
 	private VaccineInventoryRepo vaccineInventoryRepo;
@@ -167,7 +172,7 @@ public class VaccineServiceImpl implements VaccineService {
 	}
 
 	@Override
-	public String bookVaccine(Integer vaccineId, String key) throws VaccineException, LoginException {
+	public String bookVaccine(Integer vaccineId, Integer memberId, String key) throws VaccineException, LoginException {
 
 		CurrentAdminSession currentSessionAdmin = adminSessionRepo.findByuuid(key);
 		CurrentUserSession currentSessionUser = userSessionRepo.findByuuid(key);
@@ -175,7 +180,15 @@ public class VaccineServiceImpl implements VaccineService {
 		if (currentSessionAdmin != null || currentSessionUser != null) {
 			Optional<User> optUser = userRepo.findById(currentSessionUser.getUserId());
 			if (optUser.isPresent()) {
+				Optional<Member> optMember = this.findMember(memberId);
+				if (optMember.isPresent()) {
+					Member member = optMember.get();
+					if (member.getDose1status() && member.getDose2status())
+						throw new VaccineException("Sorry member already vaccinated with both doses.");
 
+				} else {
+					throw new LoginException("Member not found with ID " + memberId);
+				}
 			}
 
 			Optional<Admin> optAdmin = adminRepo.findById(currentSessionAdmin.getUserId());
@@ -187,6 +200,10 @@ public class VaccineServiceImpl implements VaccineService {
 			throw new LoginException("Oops...! Login as a user/Admin first.");
 
 		return null;
+	}
+
+	public Optional<Member> findMember(Integer memberId) {
+		return memberRepo.findById(memberId);
 	}
 
 }

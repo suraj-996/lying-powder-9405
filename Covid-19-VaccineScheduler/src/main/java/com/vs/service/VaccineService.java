@@ -21,6 +21,6 @@ public interface VaccineService {
 
 	public Boolean deleteVaccine(Integer vaccineId, String key) throws VaccineException, LoginException;
 
-	public String bookVaccine(Integer vaccineId, String key) throws VaccineException, LoginException;
+	public String bookVaccine(Integer vaccineId, Integer memberId, String key) throws VaccineException, LoginException;
 
 }

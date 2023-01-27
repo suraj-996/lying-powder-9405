@@ -309,10 +309,11 @@ public class UserController {
 
 	// Appointment method
 
-	@GetMapping("/appointments")
-	public ResponseEntity<List<Appointment>> getAllAppoinments() throws AppointmentException {
+	@GetMapping("/appointments/vaccinationCenterId/{vaccinationCenterId}")
+	public ResponseEntity<List<Appointment>> getAllAppoinmentsByVaccineCenterId(
+			@PathVariable("vaccinationCenterId") Integer vaccinationCenterId) throws AppointmentException {
 
-		List<Appointment> appnintmentList = appointmentService.getAllAppoinments();
+		List<Appointment> appnintmentList = appointmentService.getAllAppoinmentsByVaccineCenterId(vaccinationCenterId);
 
 		return new ResponseEntity<List<Appointment>>(appnintmentList, HttpStatus.OK);
 	}

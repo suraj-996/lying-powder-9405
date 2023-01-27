@@ -29,14 +29,20 @@ public class AppointmentServiceImpl implements AppointmentService {
 	private VaccinationCenterRepo vaccinationCenterRepo;
 
 	@Override
-	public List<Appointment> getAllAppoinments() throws AppointmentException {
+	public List<Appointment> getAllAppoinmentsByVaccineCenterId(Integer vaccinationCenterId)
+			throws AppointmentException {
 
-		List<Appointment> appointments = appointmentRepo.findAll();
+		Optional<VaccinationCenter> optVaccinationCenter = vaccinationCenterRepo.findById(vaccinationCenterId);
 
-		if (appointments.size() > 0)
-			return appointments;
-		else
-			throw new AppointmentException("No appointments found");
+		if (optVaccinationCenter.isPresent()) {
+			List<Appointment> oppointments = optVaccinationCenter.get().getAppointments();
+			if (oppointments.size() != 0)
+				return oppointments;
+			else
+				throw new AppointmentException("No appointments found");
+		} else {
+			throw new AppointmentException("Enter proper vaccination center Id.");
+		}
 
 	}
 
@@ -61,7 +67,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 		if (currentUser != null) {
 			Optional<VaccinationCenter> optVaccinationCenter = vaccinationCenterRepo.findById(vaccinationCenterId);
 			if (optVaccinationCenter.isPresent()) {
-				app.getVaccinationCenters().add(optVaccinationCenter.get());
+				VaccinationCenter vaccinationCenter = optVaccinationCenter.get();
+				app.getVaccinationCenters().add(vaccinationCenter);
+				vaccinationCenter.getAppointments().add(app);
+				vaccinationCenterRepo.save(vaccinationCenter);
 				return appointmentRepo.save(app);
 			} else {
 				throw new AppointmentException("VaccinationCenter not found enter correct ID.");
